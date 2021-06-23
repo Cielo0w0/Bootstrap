@@ -554,6 +554,9 @@
             <!-- section7 -->
             <div class="introduce-container section7 d-flex flex-row">
                 <div class="card-group row d-flex flex-row" style="margin: -16px;">
+                    {{-- @foreach ($collection as $item)
+
+                    @endforeach --}}
                     <!-- 卡片 -->
                     <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
                         <img src="https://dummyimage.com/420x260" class="card-img-top" alt="..."
