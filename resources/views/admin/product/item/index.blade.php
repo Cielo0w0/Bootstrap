@@ -35,6 +35,7 @@
                     <table id="my-datatable" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>是否置頂</th>
                                 <th>圖片</th>
                                 <th>產品種類</th>
                                 <th>產品名稱</th>
@@ -42,7 +43,6 @@
                                 <th>顏色</th>
                                 <th>尺寸</th>
                                 <th>價格</th>
-                                <th>是否置頂</th>
                                 <th style="width:100px">操作</th>
                             </tr>
                         </thead>
@@ -63,12 +63,18 @@
                                 <td>{{ $item->discript }}</td>
                                 <td>{{ $item->color }}</td>
                                 <?php
-                                     $sizes = json_decode($item->size);
+                                $sizes = json_decode($item->size);
                                 ?>
                                 <td>
                                     @foreach ( $sizes as $size)
-                                    {{ $size }}
+                                    {{ $size }},
                                     @endforeach
+
+                                    {{-- {{ $item->size }} --}}
+
+                                    {{-- @foreach ( $item->size as $size)
+                                    {{ $size }}
+                                    @endforeach --}}
                                 </td>
                                 <td>{{ $item->price }}</td>
                                 <td>
@@ -87,6 +93,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>是否置頂</th>
                                 <th>圖片</th>
                                 <th>產品種類</th>
                                 <th>產品名稱</th>
@@ -94,7 +101,6 @@
                                 <th>顏色</th>
                                 <th>尺寸</th>
                                 <th>價格</th>
-                                <th>是否置頂</th>
                                 <th>操作</th>
                             </tr>
                         </tfoot>
@@ -110,7 +116,9 @@
 @section('js')
 <script>
     $(document).ready(function() {
-            $('#my-datatable').DataTable();
+            $('#my-datatable').DataTable({
+                'ordering':false,
+            });
         });
 </script>
 @endsection

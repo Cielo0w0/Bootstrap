@@ -10,11 +10,10 @@ class FrontController extends Controller
     public function index()
     {
         $lists = Product::get();
+        $top_product = Product::where('top', 1)->first();
         $color = Product::COLOR;
-        $top = Product::TOP;
-        // $size = Product::SIZE;
-
-        return view('front.index',compact('lists'));
+       
+        return view('front.index', compact('lists', 'top_product'));
     }
 
 

@@ -23,7 +23,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $lists = Product::get();
+        $lists = Product::get()->sortByDesc('sort');
         return view('admin.product.item.index', compact('lists'));
         dd($lists->size);
     }

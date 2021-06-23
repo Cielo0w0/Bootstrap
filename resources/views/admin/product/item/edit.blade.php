@@ -55,8 +55,15 @@
                             {{-- <select class="form-control" id="top" name="top">
                                 @foreach ($top as $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
+                            @endforeach
                             </select> --}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sort">排序</label>
+                            <input type="text" class="form-control" id="sort" name="sort"
+                                value="{{ $record->sort}}">
+                            <small id="" class="form-text text-muted">數字越大，產品排序越前</small>
                         </div>
 
                         <div class="form-group row">
@@ -117,7 +124,6 @@
                                     style="margin: 0 3px 0 15px ">XL</label>
                             <label><input type="checkbox" name="size[]" value="XL"
                                     style="margin: 0 3px 0 15px ">XXL</label>
-                            </select>
                         </div>
 
                         <div class="form-group">

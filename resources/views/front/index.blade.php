@@ -472,14 +472,14 @@
                 <div class="section6-card mx-auto d-flex flex-wrap flex-column flex-lg-row"
                     style="background-color: white;">
                     <!-- 左邊圖 -->
-                    <img alt="ecommerce" class="" src="https://dummyimage.com/400x400">
+                    <img alt="ecommerce" class="" src="{{ $top_product->photo }}">
                     <!-- 右邊資料 -->
                     <div class="detail col-12 col-lg-6">
                         <!-- 品項名稱 -->
                         <h2 class=""
                             style="letter-spacing: .1em; font-size: .875rem; line-height: 1.25rem;color: rgb(107,114,128);margin: 0;">
-                            BRAND NAME</h2>
-                        <h1 class="" style="margin-bottom: 4px;">The Catcher in the Rye</h1>
+                            {{ $top_product->type->type_name??'' }}</h2>
+                        <h1 class="" style="margin-bottom: 4px;">{{ $top_product->product_name }}</h1>
                         <!-- 其他資訊 -->
                         <div class="informations" style="margin-bottom: 1rem;">
                             <!-- 第一層評價 -->
@@ -503,14 +503,7 @@
                                 </span>
                             </div>
                             <!-- 第二層敘述 -->
-                            <p class="leading-relaxed" style="color: rgb(75,85,99)">Fam locavore kickstarter distillery.
-                                Mixtape chillwave tumeric
-                                sriracha taximy
-                                chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage
-                                brooklyn. Everyday carry
-                                +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean
-                                shorts keytar
-                                banjo tattooed umami cardigan.
+                            <p class="leading-relaxed" style="color: rgb(75,85,99)"> <td>{{ $top_product->discript }}</td>
                             </p>
                             <!-- 第三層顏色 -->
                             <div class="size d-flex flex-row align-items-center"
@@ -523,16 +516,18 @@
                                 <div class="relative">
                                     <span class="" style="margin: 0 12px 0 24px ;">Size</span>
                                     <select class="bg-white">
-                                        <option>SM</option>
+                                        <option>XS</option>
+                                        <option>S</option>
                                         <option>M</option>
                                         <option>L</option>
                                         <option>XL</option>
+                                        <option>XXL</option>
                                     </select>
                                 </div>
                             </div>
                             <!-- 第四層價格 -->
                             <div class="price d-flex flex-row justify-content-between align-items-center w-100">
-                                <span class="" style="font-weight: 500;font-size: 1.5rem;line-height: 2rem;">$58.00
+                                <span class="" style="font-weight: 500;font-size: 1.5rem;line-height: 2rem;">{{ '$'.$top_product->price }}
                                 </span>
                                 <div class="team d-flex flex-row ">
                                     <button type="button" class="btn btn-primary btn-lg d-flex "

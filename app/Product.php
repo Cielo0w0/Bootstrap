@@ -20,7 +20,7 @@ class Product extends Model
     //     1=>1,
     // ];
 
-    protected $fillable = ['photo','product_type_id','product_name','discript','color','size','price','top'];
+    protected $fillable = ['photo','product_type_id','product_name','discript','color','size','price','top','sort'];
 
     public function type(){
         return $this->hasOne('App\ProductType','id','product_type_id');
@@ -31,6 +31,7 @@ class Product extends Model
     public function setSizeAttribute($vaule){
         $this->attributes['size'] = json_encode($vaule);
     }
+
 
     // public function getSizeAttribute($vaule){
     //     return $this->attributes['size'] = json_decode($vaule);
