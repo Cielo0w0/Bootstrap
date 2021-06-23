@@ -48,22 +48,58 @@
                         enctype="multipart/form-data">
                         @csrf
 
+                        <div class="form-group row">
+                            <label class="col-12" for="">產品主要圖片</label>
+                            <div class="col-md-3">
+
+                                <img class="w-100" src="{{ $record->photo }}" alt="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="photos">修改產品主要圖片</label>
+                            <input type="file" class="form-control" id="photos" name="photo">
+                        </div>
+
+                        <hr>
+
                         <div class="form-group">
                             <label for="product_type_id">產品種類</label>
                             <select class="form-control" id="product_type_id" name="product_type_id">
                                 @foreach ($type as $item)
                                 <option @if($item->id === $record->type->id ) selected @endif
                                     value="{{ $item->id }}">{{ $item->type_name }}</option>
-                                {{-- <option @if ($record->type ==$item) selected @endif value="{{ $item->id }}">{{ $item-> type_name }}
-                                </option> --}}
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="product_name">產品品項名稱</label>
+                            <label for="product_name">產品名稱</label>
                             <input type="text" class="form-control" id="product_name" name="product_name"
                                 value="{{ $record->product_name }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="discript">產品介紹</label>
+                            <textarea class="form-control" name="discript" id="discript" cols="30"
+                                rows="10">{{ $record->discript }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">顏色</label>
+                            <select class="form-control" id="color" name="color">
+                                @foreach ( $color as $item)
+                                    <option @if ($record->color ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">尺寸</label>
+                            <select class="form-control" id="size" name="size">
+                                @foreach ($size as $item)
+                                    <option @if ($record->size ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -72,49 +108,13 @@
                                 value="{{ $record->price }}">
                         </div>
 
-                        {{-- 單圖片 --}}
-                        <div class="form-group row">
-                            <label class="col-12" for="">產品主要圖片</label>
-                            <div class="col-md-3">
-                                {{-- 點選到圖片刪除按鈕時，將該圖片的ID記錄下來，傳到後端 --}}
-                                {{-- 後端根據ID找到該筆資料，進行刪除 --}}
-                                <img class="w-100" src="{{ $record->photo }}" alt="">
-                            </div>
-                        </div>
-
                         <div class="form-group">
-                            <label for="photos">修改產品主要圖片</label>
-                            <input type="file" class="form-control" id="photos" name="photo">
-                        </div>
-
-                        <hr>
-
-                        {{-- 多圖片 --}}
-                        {{-- 讓使用者可以在編輯資料時，砍掉關聯的圖片 --}}
-                        <div class="form-group row">
-                            <label class="col-12" for="">產品其他圖片</label>
-                            @foreach ($record->photos as $photo)
-                            <div class="col-md-3">
-                                {{-- 點選到圖片刪除按鈕時，將該圖片的ID記錄下來，傳到後端 --}}
-                                {{-- 後端根據ID找到該筆資料，進行刪除 --}}
-                                <div data-id="{{ $photo->id }}" class="del-img-btn">x</div>
-                                <img class="w-100" src="{{ $photo->photo }}" alt="">
-                            </div>
-                            @endforeach
-                        </div>
-
-                        <div class="form-group">
-                            <label for="photos">新增產品其他圖片</label>
-                            <input type="file" class="form-control" id="photos" name="photos[]" multiple>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group">
-                            <label for="discript">產品描述</label>
-                            <textarea class="form-control" name="discript" id="discript" cols="30"
-                                rows="10">{{ $record->discript }}</textarea>
-                            {{-- <input type="text" class="form-control" id="discript" name="discript"> --}}
+                            <label for="top">是否至頂</label>
+                            <select class="form-control" id="top" name="top">
+                                @foreach ($top as $item)
+                                    <option @if ($record->top ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">編輯</button>
@@ -156,34 +156,34 @@
 
 
     // js
-    var del_btns = document.querySelectorAll('.del-img-btn');
-    del_btns.forEach(function(delbtn){
-        delbtn.addEventListener('click',function(){
-            var id = this.getAttribute('data-id');
-            var parent_element = this.parentElement;
+    // var del_btns = document.querySelectorAll('.del-img-btn');
+    // del_btns.forEach(function(delbtn){
+    //     delbtn.addEventListener('click',function(){
+    //         var id = this.getAttribute('data-id');
+    //         var parent_element = this.parentElement;
 
-            var formdata = new FormData();
-            formdata.append('_token','{{  csrf_token()  }}');
-            formdata.append('id',id);
+    //         var formdata = new FormData();
+    //         formdata.append('_token','{{  csrf_token()  }}');
+    //         formdata.append('id',id);
 
-            var yes = confirm('是否確認刪除此圖片?')
-            if (yes) {
-                fetch('/admin/product/item/deleteImage',{
-                    'method' : 'POST',
-                    'body':formdata
-                })
-                .then(function(response){
-                    return response.text();
-                })
-                .then(function(result){
-                    if (result=='success') {
-                        alert('刪除成功!')
-                        parent_element.remove();
-                    }
-                });
-            }
-        });
-    });
+    //         var yes = confirm('是否確認刪除此圖片?')
+    //         if (yes) {
+    //             fetch('/admin/product/item/deleteImage',{
+    //                 'method' : 'POST',
+    //                 'body':formdata
+    //             })
+    //             .then(function(response){
+    //                 return response.text();
+    //             })
+    //             .then(function(result){
+    //                 if (result=='success') {
+    //                     alert('刪除成功!')
+    //                     parent_element.remove();
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
 
 
 </script>

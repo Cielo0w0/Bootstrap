@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class ProductController extends Controller
 {
@@ -18,11 +20,14 @@ class ProductController extends Controller
     }
 
 
+
     public function index()
     {
         $lists = Product::get();
         return view('admin.product.item.index', compact('lists'));
     }
+
+
 
 
     public function create()
@@ -36,22 +41,75 @@ class ProductController extends Controller
         return view($this->create, compact('type', 'color', 'size', 'top'));
     }
 
+
+
     public function store(Request $request)
     {
-        // 如果IMG有檔案
+        Product::create($request->all());
+
         if ($request->hasFile('img')) {
             $path = FileController::imageUpload($request->file('img'), 'product');
         }
 
-        Product::create([
-            'type'=>$request->type,
-            'product_type_id'=>date("Y-m-d"),
-            'title'=>$request->title,
-            // 把圖片存的路徑寫入img : http://127.0.0.1:8000/upload/圖片檔案名稱.副檔名  (*上面註1)
-            // ( 將圖片儲存的路徑存入資料庫 )
-            'img'=>$path??'',
-            'content'=>$request->content,
-
-        ]);
+        return redirect('/admin/product/item')->with('message', '新增產品成功!');
     }
+
+
+    public function edit($id)
+    {
+        $record = Product::find($id);
+        $type = ProductType::get();
+
+        $color = Product::COLOR;
+        $size = Product::SIZE;
+        $top = Product::TOP;
+
+        return view($this->edit, compact('record', 'type', 'color', 'size', 'top'));
+    }
+
+
+
+
+    public function update(Request $request, $id)
+    {
+
+        $old_record = Product::find($id);
+
+        if ($request->hasFile('img')) {
+            // 刪除舊照片
+            File::delete(public_path(). $old_record->img);
+
+            $file = $request->file('img');
+            if (!is_dir('upload/')) {
+                mkdir('upload/');
+            }
+            $extenstion = $request->img->getClientOriginalExtension();
+            $filename = md5(uniqid(rand())) . '.' . $extenstion;
+            $path = '/upload/' . $filename;
+            move_uploaded_file($file, public_path() . $path);
+
+            $old_record->img = $path;
+        }
+
+        $old_record->product_type_id = $request->product_type_id;
+        $old_record->product_name = $request->product_name;
+        $old_record->discript = $request->discript;
+        $old_record->color = $request->color;
+        $old_record->color = $request->color;
+        $old_record->size = $request->size;
+        $old_record->price = $request->price;
+        $old_record->top = $request->top;
+        $old_record->save();
+
+        return redirect('/admin/product/item')->with('message', '編輯最新消息成功!');
+    }
+
+
+    public function delete(Request $request,$id){
+
+        $old_record = Product::find($id);
+        $old_record->delete();
+        return redirect('/admin/product/item')->with('message','刪除最新消息成功!');
+    }
+
 }
