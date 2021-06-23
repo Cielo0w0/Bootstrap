@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('color')->comment('產品顏色');
             $table->string('size')->comment('產品尺寸');
             $table->integer('price')->comment('產品價格');
-            $table->boolean('top')->comment('是否至頂');
+            $table->boolean('top')->comment('是否至頂')->nullable();;
             $table->timestamps();
         });
     }

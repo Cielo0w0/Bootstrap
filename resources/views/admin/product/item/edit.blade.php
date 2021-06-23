@@ -48,16 +48,26 @@
                         enctype="multipart/form-data">
                         @csrf
 
+                        <div class="form-group">
+                            <label for="top" style="margin: 0 30px 0 0">是否置頂</label>
+                            <input type="checkbox" class="form-check-input" id="top" name="top" value="1">
+                            <label class="form-check-input" for="top"></label>
+                            {{-- <select class="form-control" id="top" name="top">
+                                @foreach ($top as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-12" for="">產品主要圖片</label>
                             <div class="col-md-3">
-
                                 <img class="w-100" src="{{ $record->photo }}" alt="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="photos">修改產品主要圖片</label>
-                            <input type="file" class="form-control" id="photos" name="photo">
+                            <label for="photo">修改產品主要圖片</label>
+                            <input type="file" class="form-control" id="photo" name="photo">
                         </div>
 
                         <hr>
@@ -88,17 +98,25 @@
                             <label for="color">顏色</label>
                             <select class="form-control" id="color" name="color">
                                 @foreach ( $color as $item)
-                                    <option @if ($record->color ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
+                                <option @if ($record->color ==$item) selected @endif value="{{ $item }}">{{ $item }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="size">尺寸</label>
-                            <select class="form-control" id="size" name="size">
-                                @foreach ($size as $item)
-                                    <option @if ($record->size ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
+                            <label for="size">尺寸</label><br>
+                            <label><input type="checkbox" name="size[]" value="XS" style="margin: 0 3px 0 0 ">XS</label>
+                            <label><input type="checkbox" name="size[]" value="S"
+                                    style="margin: 0 3px 0 15px ">S</label>
+                            <label><input type="checkbox" name="size[]" value="M"
+                                    style="margin: 0 3px 0 15px ">M</label>
+                            <label><input type="checkbox" name="size[]" value="L"
+                                    style="margin: 0 3px 0 15px ">L</label>
+                            <label><input type="checkbox" name="size[]" value="XL"
+                                    style="margin: 0 3px 0 15px ">XL</label>
+                            <label><input type="checkbox" name="size[]" value="XL"
+                                    style="margin: 0 3px 0 15px ">XXL</label>
                             </select>
                         </div>
 
@@ -106,15 +124,6 @@
                             <label for="price">價格</label>
                             <input type="text" class="form-control" id="price" name="price"
                                 value="{{ $record->price }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="top">是否至頂</label>
-                            <select class="form-control" id="top" name="top">
-                                @foreach ($top as $item)
-                                    <option @if ($record->top ==$item) selected @endif value="{{ $item }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">編輯</button>

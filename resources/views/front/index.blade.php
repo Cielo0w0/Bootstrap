@@ -554,138 +554,25 @@
             <!-- section7 -->
             <div class="introduce-container section7 d-flex flex-row">
                 <div class="card-group row d-flex flex-row" style="margin: -16px;">
-                    {{-- @foreach ($collection as $item)
-
-                    @endforeach --}}
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/420x260" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                The Catalyzer
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);" style="color: rgb(75,85,124);">$16.00
-                            </p>
+                    @foreach ($lists as $item)
+                        <!-- 卡片 -->
+                        <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
+                            <img src="{{ $item->photo??''}}" class="card-img-top" alt="..."
+                                style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
+                            <div class="card-body" style="padding: 0;">
+                                <h3 class="card-small-title"
+                                    style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
+                                    {{ $item->type->type_name??''}}
+                                </h3>
+                                <h5 class="card-title"
+                                    style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
+                                    {{ $item->product_name }}
+                                </h5>
+                                <p class="card-text" style="color: rgb(75,85,124);" style="color: rgb(75,85,124);">{{ '$'.$item->price }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/421x261" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                Shooting Stars
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$21.15</p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/422x262" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                Neptune
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$12.00 </p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/423x263" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                The 400 Blows
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$18.40 </p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/424x264" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                The Catalyzer
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$16.00 </p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/425x265" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                Shooting Stars
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$21.15 </p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/427x267" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                The 400 Blows
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$18.40</p>
-                        </div>
-                    </div>
-                    <!-- 卡片 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                        <img src="https://dummyimage.com/428x268" class="card-img-top" alt="..."
-                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                        <div class="card-body" style="padding: 0;">
-                            <h3 class="card-small-title"
-                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                CATEGORY
-                            </h3>
-                            <h5 class="card-title"
-                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                The Catalyzer
-                            </h5>
-                            <p class="card-text" style="color: rgb(75,85,124);">$16.00 </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 

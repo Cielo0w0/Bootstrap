@@ -31,6 +31,18 @@
                     <div class="card-body">
                         <form action="{{ asset('/admin/product/item/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+
+                            <div class="form-group">
+                                <label for="top" style="margin: 0 30px 0 0">是否置頂</label>
+                                <input type="checkbox" class="form-check-input" id="top" name="top" value="1">
+                                <label class="form-check-input" for="top"></label>
+                                {{-- <select class="form-control" id="top" name="top">
+                                    @foreach ($top as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select> --}}
+                            </div>
+
                             <div class="form-group">
                                 <label for="photo">產品主要圖片</label>
                                 <input type="file" multiple class="form-control" id="photo" name="photo" required>
@@ -58,6 +70,7 @@
 
                             <div class="form-group">
                                 <label for="color">顏色</label>
+                                {{-- <input type="color"class="form-control" id="color" name="color"> --}}
                                 <select class="form-control" id="color" name="color">
                                     @foreach ( $color as $item)
                                         <option value="{{ $item }}">{{ $item }}</option>
@@ -66,12 +79,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="size">尺寸</label>
-                                <select class="form-control" id="size" name="size">
+                                <label for="size">尺寸</label><br>
+                                <label><input type="checkbox"  name="size[]" value="XS" style="margin: 0 3px 0 0 ">XS</label>
+                                <label><input type="checkbox"  name="size[]" value="S" style="margin: 0 3px 0 15px ">S</label>
+                                <label><input type="checkbox"  name="size[]" value="M" style="margin: 0 3px 0 15px ">M</label>
+                                <label><input type="checkbox"  name="size[]" value="L" style="margin: 0 3px 0 15px ">L</label>
+                                <label><input type="checkbox"  name="size[]" value="XL" style="margin: 0 3px 0 15px ">XL</label>
+                                <label><input type="checkbox"  name="size[]" value="XL" style="margin: 0 3px 0 15px ">XXL</label>
+                                {{-- <select class="form-control" id="size" name="size">
                                     @foreach ($size as $item)
                                         <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
 
                             <div class="form-group">
@@ -85,14 +104,6 @@
                                 <input type="file" multiple class="form-control" id="photos" name="photos[]">
                             </div> --}}
 
-                            <div class="form-group">
-                                <label for="top">是否至頂</label>
-                                <select class="form-control" id="top" name="top">
-                                    @foreach ($top as $item)
-                                        <option value="{{ $item }}">{{ $item }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <button type="submit" class="btn btn-primary">新增</button>
                         </form>

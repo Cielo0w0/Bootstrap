@@ -25,6 +25,7 @@ class ProductController extends Controller
     {
         $lists = Product::get();
         return view('admin.product.item.index', compact('lists'));
+        dd($lists->size);
     }
 
 
@@ -32,24 +33,23 @@ class ProductController extends Controller
 
     public function create()
     {
-
         $type = ProductType::get();
-        $color = Product::COLOR;
-        $size = Product::SIZE;
-        $top = Product::TOP;
 
-        return view($this->create, compact('type', 'color', 'size', 'top'));
+        $color = Product::COLOR;
+        // $top = Product::TOP;
+
+        return view($this->create, compact('type', 'color'));
     }
 
 
 
     public function store(Request $request)
     {
-        Product::create($request->all());
-
-        if ($request->hasFile('img')) {
-            $path = FileController::imageUpload($request->file('img'), 'product');
+        $requestData = $request->all();
+        if ($request->hasFile('photo')) {
+            $requestData['photo']= FileController::imageUpload($request->file('photo'));
         }
+        $new_record = Product::create($requestData);
 
         return redirect('/admin/product/item')->with('message', '新增產品成功!');
     }
@@ -61,10 +61,9 @@ class ProductController extends Controller
         $type = ProductType::get();
 
         $color = Product::COLOR;
-        $size = Product::SIZE;
-        $top = Product::TOP;
+        // $top = Product::TOP;
 
-        return view($this->edit, compact('record', 'type', 'color', 'size', 'top'));
+        return view($this->edit, compact('record', 'type', 'color'));
     }
 
 
@@ -75,20 +74,20 @@ class ProductController extends Controller
 
         $old_record = Product::find($id);
 
-        if ($request->hasFile('img')) {
+        if ($request->hasFile('photo')) {
             // 刪除舊照片
-            File::delete(public_path(). $old_record->img);
+            File::delete(public_path(). $old_record->photo);
 
-            $file = $request->file('img');
+            $file = $request->file('photo');
             if (!is_dir('upload/')) {
                 mkdir('upload/');
             }
-            $extenstion = $request->img->getClientOriginalExtension();
+            $extenstion = $request->photo->getClientOriginalExtension();
             $filename = md5(uniqid(rand())) . '.' . $extenstion;
             $path = '/upload/' . $filename;
             move_uploaded_file($file, public_path() . $path);
 
-            $old_record->img = $path;
+            $old_record->photo = $path;
         }
 
         $old_record->product_type_id = $request->product_type_id;
