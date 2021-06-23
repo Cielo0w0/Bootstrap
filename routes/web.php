@@ -13,30 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.index');
+Route::get('/','FrontController@index');
+Route::get('/register','FrontController@register');
+Route::prefix('/cart')->group(function (){
+    Route::get('/cartA','FrontController@cartA');
+    Route::get('/cartB','FrontController@cartB');
+    Route::get('/cartC','FrontController@cartC');
+    Route::get('/cartD','FrontController@cartD');
 });
 
-Route::get('/shopping-cart-A', function () {
-    return view('front.shopping-cart-A');
-});
+Auth::routes();
 
-Route::get('/shopping-cart-B', function () {
-    return view('front.shopping-cart-B');
-});
-
-Route::get('/shopping-cart-C', function () {
-    return view('front.shopping-cart-C');
-});
-
-Route::get('/shopping-cart-D', function () {
-    return view('front.shopping-cart-D');
-});
-
-Route::get('/register', function () {
-    return view('front.register');
-});
-
-Route::get('/layout', function () {
-    return view('layout.layout');
-});
+Route::get('/home', 'HomeController@index')->name('home');

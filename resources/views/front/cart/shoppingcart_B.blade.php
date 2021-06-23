@@ -3,7 +3,7 @@
 @section('title', '購物車2')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('/css/數位方塊-新購物車2.css')}}">
+<link rel="stylesheet" href="{{asset('/css/shoppingcart_B.css')}}">
 @endsection
 
 @section('step')
@@ -100,8 +100,7 @@
         <label class="d-flex align-items-center"
             style="padding: 1.25rem 0 0 ; padding-bottom: 1.25rem;border-width: 1px 0 0px 0;border-color: #e5e7eb;border-style: solid;margin: 0 0 0 1.5rem; width: calc(100% - 1.5rem);">
             <input type="radio" class="form-radio" name="accountType" value="personal">
-            <span class="d-flex "
-                style="margin-left: .5rem;font-size: 1.25rem;  line-height: 1.75rem;">超商店到店
+            <span class="d-flex " style="margin-left: .5rem;font-size: 1.25rem;  line-height: 1.75rem;">超商店到店
             </span>
         </label>
     </div>
@@ -119,22 +118,19 @@
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">小計:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">運費:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">總計:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
 </div>
@@ -147,10 +143,11 @@
         上一步
     </button>
     <!-- 下 -->
-    <button type="button" class="btn btn-primary btn-lg"
-        style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
-        下一步
-    </button>
+    <a href="{{ asset('/cart/cartC') }}">
+        <button type="button" class="btn btn-primary btn-lg"
+            style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
+            下一步
+        </button>
+    </a>
 </div>
 @endsection
-

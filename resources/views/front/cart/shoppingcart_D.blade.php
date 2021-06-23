@@ -3,7 +3,7 @@
 @section('title', '購物車4')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('/css/數位方塊-新購物車4.css')}}">
+<link rel="stylesheet" href="{{asset('/css/shoppingcart_D.css')}}">
 @endsection
 
 @section('step')
@@ -58,11 +58,9 @@
         <div class="item-1 d-flex justify-content-between" style="padding:24px 32px 0 0;margin-top: 24px;">
             <!-- 左邊資訊 -->
             <div class="d-flex align-items-center ">
-                <img src="/img.food1.jpg'" class=""
-                    style="width: 60px; height: 60px; border-radius: 50%;">
+                <img src="/img.food1.jpg'" class="" style="width: 60px; height: 60px; border-radius: 50%;">
 
-                <div class="d-flex flex-column align-items-start justify-content-center "
-                    style="margin-left: 12px;">
+                <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
                     <span class="" style="font-weight: 500;">Chicken momo</span>
                     <span class=""
                         style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#41551</span>
@@ -77,8 +75,7 @@
 
                 <!-- 價格 -->
                 <div class="pr-8 d-flex  justify-content-center align-items-center">
-                    <span class=""
-                        style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
+                    <span class="" style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
                 </div>
             </div>
         </div>
@@ -91,8 +88,7 @@
                 <img src="https://i.imgur.com/Uv2Yqzo.jpg" class=""
                     style="width: 60px; height: 60px; border-radius: 50%;">
 
-                <div class="d-flex flex-column align-items-start justify-content-center "
-                    style="margin-left: 12px;">
+                <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
                     <span class="" style="font-weight: 500;">Spicy Mexican potatoes</span>
                     <span class=""
                         style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#66999</span>
@@ -107,8 +103,7 @@
 
                 <!-- 價格 -->
                 <div class="pr-8 d-flex  justify-content-center align-items-center">
-                    <span class=""
-                        style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
+                    <span class="" style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
                 </div>
             </div>
         </div>
@@ -121,8 +116,7 @@
                 <img src="https://i.imgur.com/xbTAITF.jpg" class=""
                     style="width: 60px; height: 60px; border-radius: 50%;">
 
-                <div class="d-flex flex-column align-items-start justify-content-center "
-                    style="margin-left: 12px;">
+                <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
                     <span class="" style="font-weight: 500;">Breakfast</span>
                     <span class=""
                         style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#86577</span>
@@ -137,8 +131,7 @@
 
                 <!-- 價格 -->
                 <div class="pr-8 d-flex  justify-content-center align-items-center">
-                    <span class=""
-                        style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
+                    <span class="" style="font-size: .75rem; line-height: 1rem;font-weight: 500; ">$10.50</span>
                 </div>
             </div>
         </div>
@@ -151,8 +144,7 @@
         <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;">寄送資料
         </h2>
         <div class="d-flex" style="padding-top: 1.5rem;margin-top: .5rem;">
-            <label class=""
-                style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
+            <label class="" style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
                 for="cus_name">
                 姓名
             </label>
@@ -161,8 +153,7 @@
             </div>
         </div>
         <div class="d-flex" style="padding-top: 1.5rem;margin-top: .5rem;">
-            <label class=""
-                style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
+            <label class="" style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
                 for="cus_name">
                 電話
             </label>
@@ -171,8 +162,7 @@
             </div>
         </div>
         <div class="d-flex" style="padding-top: 1.5rem;margin-top: .5rem;">
-            <label class=""
-                style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
+            <label class="" style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
                 for="cus_name">
                 Email
             </label>
@@ -181,8 +171,7 @@
             </div>
         </div>
         <div class="d-flex" style="padding-top: 1.5rem;margin-top: .5rem;">
-            <label class=""
-                style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
+            <label class="" style="width: 5rem;padding: .25rem;font-size: 1.25rem;line-height: 1.75rem; margin:0;"
                 for="cus_name">
                 地址
             </label>
@@ -204,31 +193,30 @@
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">小計:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">運費:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
     <div class="d-flex justify-content-between align-items-center w-25">
         <span class=""
             style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">總計:</span>
-        <span class=""
-            style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+        <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
             $24.90</span>
     </div>
 </div>
 <!-- 返回&下一步 -->
 <div class="next d-flex justify-content-end flex-row align-items-center"
     style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-    <button type="button" class="btn btn-primary btn-lg"
-        style="padding:0 48px;height: 3rem;border-radius: .25rem;background-color: rgb(59,130,246);">
-        返回首頁
-    </button>
+    <a href="{{ asset('/') }}">
+        <button type="button" class="btn btn-primary btn-lg"
+            style="padding:0 48px;height: 3rem;border-radius: .25rem;background-color: rgb(59,130,246);">
+            返回首頁
+        </button>
+    </a>
 </div>
 @endsection

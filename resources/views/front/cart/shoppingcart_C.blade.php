@@ -3,7 +3,7 @@
 @section('title', '購物車3')
 
 @section('css')
-<link rel="stylesheet" href="{{asset('/css/數位方塊-新購物車3.css')}}">
+<link rel="stylesheet" href="{{asset('/css/shoppingcart_C.css')}}">
 @endsection
 
 @section('step')
@@ -57,8 +57,7 @@
         <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
             姓名
         </label>
-        <input class="" id="cus_name" name="cus_name" type="text" required="" placeholder="王小明"
-            aria-label="Name"
+        <input class="" id="cus_name" name="cus_name" type="text" required="" placeholder="王小明" aria-label="Name"
             style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
     </div>
     <!-- 電話 -->
@@ -75,8 +74,8 @@
         <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
             Email
         </label>
-        <input class="" id="cus_email" name="cus_email" type="email" required=""
-            placeholder="abc123@gmail.com" aria-label="Email"
+        <input class="" id="cus_email" name="cus_email" type="email" required="" placeholder="abc123@gmail.com"
+            aria-label="Email"
             style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
     </div>
     <!-- 地址 -->
@@ -97,8 +96,7 @@
                 style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
         </div>
         <div class="w-100" style="margin-top:8px ;">
-            <input class="" id="cus_email" name="cus_email" type="text" required="" placeholder="地址"
-                aria-label="Email"
+            <input class="" id="cus_email" name="cus_email" type="text" required="" placeholder="地址" aria-label="Email"
                 style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
         </div>
     </div>
@@ -115,22 +113,19 @@
         <div class="d-flex justify-content-between align-items-center w-25">
             <span class=""
                 style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">小計:</span>
-            <span class=""
-                style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
                 $24.90</span>
         </div>
         <div class="d-flex justify-content-between align-items-center w-25">
             <span class=""
                 style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">運費:</span>
-            <span class=""
-                style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
                 $24.90</span>
         </div>
         <div class="d-flex justify-content-between align-items-center w-25">
             <span class=""
                 style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">總計:</span>
-            <span class=""
-                style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
                 $24.90</span>
         </div>
     </div>
@@ -143,10 +138,12 @@
             上一步
         </button>
         <!-- 下 -->
-        <button type="button" class="btn btn-primary btn-lg"
-            style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
-            前往付款
-        </button>
+        <a href="{{ asset('/cart/cartD') }}">
+            <button type="button" class="btn btn-primary btn-lg"
+                style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
+                前往付款
+            </button>
+        </a>
     </div>
 </div>
 @endsection

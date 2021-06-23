@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/數位方塊-首頁.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
@@ -39,8 +39,12 @@
                     style="color: rgb(55,65,81);">Contact</a>
 
                 <div class="i-con">
-                    <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
-                    <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    <a href="{{ asset('/cart/cartA') }}">
+                        <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
+                    </a>
+                    <a href="{{ asset('/register') }}">
+                        <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -906,14 +910,14 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
 
     <Script>
         var navbar_toggler = document.querySelector('.navbar-toggler')
