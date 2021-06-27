@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class FrontController extends Controller
         $top_product = Product::where('top', 1)->first();
         $color = Product::COLOR;
 
-        return view('front.index', compact('lists', 'top_product'));
+        $newslists=News::get();
+
+        return view('front.index', compact('lists', 'top_product','newslists'));
     }
     // ->orWhere('sort','')
 

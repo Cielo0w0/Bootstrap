@@ -309,74 +309,22 @@
                 </div>
                 <!-- 下方card -->
                 <div class="card-group-4 d-flex flex-wrap justify-content-between flex-row">
-
+                    @foreach ($newslists as $item)
+                    {{-- 卡片 --}}
                     <div class="col-12 col-md-6 col-xl-3" style="padding: 16px;">
                         <div class="card" style="padding: 24px;">
-                            <img src="https://dummyimage.com/720x400" class="card-img-top" alt="..."
-                                style="margin-bottom: 24px;display: block;object-fit: cover;object-position: center;">
+                            <img src="{{ $item->photo??''}}" class="card-img-top" alt="..."
+                                style="margin-bottom: 24px;display: block;object-fit: cover;object-position: center;height: 230px">
                             <div class="card-body" style="padding: 0;">
                                 <h3 class="card-small-title"
                                     style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: #7866F1;">
-                                    SUBTITLE</h3>
-                                <h5 class="card-title">Chichen Itza</h5>
-                                <p class="card-text" style="color:rgb(75,85,99)">Fingerstache flexitarian street art
-                                    8-bit waistcoat. Distillery
-                                    hexagon disrupt edison bulbche.
-                                </p>
+                                    {{ $item->newstype->news_type_name??''}}</h3>
+                                <h5 class="card-title"> {{ $item->title }}</h5>
+                                <p class="card-text" style="color:rgb(75,85,99)">{{ $item->content }}</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12 col-md-6 col-xl-3" style="padding: 16px;">
-                        <div class="card" style="padding: 24px;">
-                            <img src="https://dummyimage.com/721x401" class="card-img-top" alt="..."
-                                style="margin-bottom: 24px;display: block;object-fit: cover;object-position: center;">
-                            <div class="card-body" style="padding: 0;">
-                                <h3 class="card-small-title"
-                                    style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: #7866F1;">
-                                    SUBTITLE</h3>
-                                <h5 class="card-title">Colosseum Roma</h5>
-                                <p class="card-text" style="color:rgb(75,85,99)">
-                                    Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt
-                                    edison bulbche.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-3" style="padding: 16px;">
-                        <div class="card" style="padding: 24px;">
-                            <img src="https://dummyimage.com/722x402" class="card-img-top" alt="..."
-                                style="margin-bottom: 24px;display: block;object-fit: cover;object-position: center;">
-                            <div class="card-body" style="padding: 0;">
-                                <h3 class="card-small-title"
-                                    style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: #7866F1;">
-                                    SUBTITLE</h3>
-                                <h5 class="card-title">Great Pyramid of Giza</h5>
-                                <p class="card-text" style="color:rgb(75,85,99)">
-                                    Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt
-                                    edison bulbche.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-3" style="padding: 16px;">
-                        <div class="card" style="padding: 24px;">
-                            <img src="https://dummyimage.com/723x403" class="card-img-top" alt="..."
-                                style="margin-bottom: 24px;display: block;object-fit: cover;object-position: center;">
-                            <div class="card-body" style="padding: 0;">
-                                <h3 class="card-small-title"
-                                    style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: #7866F1;">
-                                    SUBTITLE</h3>
-                                <h5 class="card-title">San Francisco</h5>
-                                <p class="card-text" style="color:rgb(75,85,99)">
-                                    Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt
-                                    edison bulbche.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>

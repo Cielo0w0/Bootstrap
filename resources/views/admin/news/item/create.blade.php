@@ -36,7 +36,7 @@
                                 <label for="news_type_id">最新消息種類</label>
                                 <select class="form-control" id="news_type_id" name="news_type_id" required>
                                     @foreach ($type as $item)
-                                        <option value="{{ $item->id }}">{{ $item-> news_type_name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->news_type_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

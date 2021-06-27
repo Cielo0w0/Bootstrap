@@ -36,13 +36,15 @@ class NewsController extends Controller
 
 
     public function store(Request $request){
+
         // 如果IMG有檔案
         if ( $request->hasFile('photo')) {
             $path = FileController::imageUpload($request->file('photo'));
         }
 
+
         News::create([
-            'type'=>$request->type,
+            'news_type_id'=>$request->news_type_id,
             'publish_date'=>date("Y-m-d"),
             'title'=>$request->title,
             // 把圖片存的路徑寫入img : http://127.0.0.1:8000/upload/圖片檔案名稱.副檔名  (*上面註1)
