@@ -37,8 +37,6 @@ Route::get('/admin', 'HomeController@index')->name('home');
 Route::get('/admin/home', 'HomeController@index')->name('home');
 
 
-
-
 Route::prefix('/admin/product')->group(function () {
     // 產品管理
     Route::prefix('/type')->group(function () {
@@ -60,7 +58,15 @@ Route::prefix('/admin/product')->group(function () {
         Route::get('/edit/{id}', 'ProductController@edit');
         Route::post('/update/{id}', 'ProductController@update');
         Route::delete('/delete/{id}', 'ProductController@delete');
+        Route::post('/deleteImage', 'ProductController@deleteImage');
     });
+});
+
+Route::prefix('/admin/contactus')->group(function (){
+    Route::get('/','ContactUsController@index');
+    Route::post('/store','ContactUsController@store');
+    Route::get('/seemore/{id}','ContactUsController@seemore');
+    Route::delete('/delete/{id}', 'ContactUsController@delete');
 });
 
 

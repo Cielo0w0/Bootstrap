@@ -503,7 +503,8 @@
                                 </span>
                             </div>
                             <!-- 第二層敘述 -->
-                            <p class="leading-relaxed" style="color: rgb(75,85,99)"> <td>{{ $top_product->discript }}</td>
+                            <p class="leading-relaxed" style="color: rgb(75,85,99)">
+                                <td>{{ $top_product->discript }}</td>
                             </p>
                             <!-- 第三層顏色 -->
                             <div class="size d-flex flex-row align-items-center"
@@ -527,7 +528,8 @@
                             </div>
                             <!-- 第四層價格 -->
                             <div class="price d-flex flex-row justify-content-between align-items-center w-100">
-                                <span class="" style="font-weight: 500;font-size: 1.5rem;line-height: 2rem;">{{ '$'.$top_product->price }}
+                                <span class=""
+                                    style="font-weight: 500;font-size: 1.5rem;line-height: 2rem;">{{ '$'.$top_product->price }}
                                 </span>
                                 <div class="team d-flex flex-row ">
                                     <button type="button" class="btn btn-primary btn-lg d-flex "
@@ -550,23 +552,24 @@
             <div class="introduce-container section7 d-flex flex-row">
                 <div class="card-group row d-flex flex-row" style="margin: -16px;">
                     @foreach ($lists as $item)
-                        <!-- 卡片 -->
-                        <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
-                            <img src="{{ $item->photo??''}}" class="card-img-top" alt="..."
-                                style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
-                            <div class="card-body" style="padding: 0;">
-                                <h3 class="card-small-title"
-                                    style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
-                                    {{ $item->type->type_name??''}}
-                                </h3>
-                                <h5 class="card-title"
-                                    style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
-                                    {{ $item->product_name }}
-                                </h5>
-                                <p class="card-text" style="color: rgb(75,85,124);" style="color: rgb(75,85,124);">{{ '$'.$item->price }}
-                                </p>
-                            </div>
+                    <!-- 卡片 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 bg-white" style="padding: 16px;">
+                        <img src="{{ $item->photo??''}}" class="card-img-top" alt="..."
+                            style="margin-bottom: 16px;border-radius: .25rem;height: 12rem;display: block;object-fit: cover;object-position: center;">
+                        <div class="card-body" style="padding: 0;">
+                            <h3 class="card-small-title"
+                                style="letter-spacing: .1em;font-size: .75rem;line-height: 1rem;color: rgb(131,136,181);margin-bottom: 4px;">
+                                {{ $item->type->type_name??''}}
+                            </h3>
+                            <h5 class="card-title"
+                                style="font-size: 1.125rem; line-height: 1.75rem; font-weight: 500;margin-bottom:4px ;">
+                                {{ $item->product_name }}
+                            </h5>
+                            <p class="card-text" style="color: rgb(75,85,124);" style="color: rgb(75,85,124);">
+                                {{ '$'.$item->price }}
+                            </p>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -577,47 +580,51 @@
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.716529069472!2d120.71810775038034!3d24.25169138426785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34691a0f76c278fd%3A0x2877808fa5ca752d!2z5LiK55uK6LOH6KiK!5e0!3m2!1szh-TW!2stw!4v1619401770970!5m2!1szh-TW!2stw"
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                 </iframe>
+
                 <!-- 回饋 -->
-                <div class="introduce-container d-flex bg-white justify-content-end">
-                    <!-- 卡體 -->
-                    <div class="col-md-6 col-lg-4 bg-white d-flex flex-column d-flex feedback"
-                        style="padding: 32px;border-radius: .5rem;--tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06); box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);">
-                        <!-- 說明 -->
-                        <h2 class=""
-                            style="font-weight: 500;font-size: 1.125rem;line-height: 1.75rem;margin-bottom: .25rem;">
-                            Feedback
-                        </h2>
-                        <p class="" style="margin-bottom: 1.25rem;line-height: 1.625;color: rgb(103,111,123);">
-                            Post-ironic portland shabby chic echo park, banjo fashion axe
-                        </p>
-                        <!-- 填入信箱 -->
-                        <div class="d-flex flex-column" style="margin-bottom:16px ;">
-                            <label for="email" class=""
-                                style="line-height: 1.75rem;font-size: .875rem;color: rgb(103,111,123);">
-                                Email
-                            </label>
-                            <input type="email" id="email" name="email" class="bg-white">
+                <form action="{{ asset('admin/contactus/store') }}" method="POST"  class="introduce-container d-flex bg-white justify-content-end">
+                    @csrf
+                    <div class="introduce-container d-flex bg-white justify-content-end">
+                        <!-- 卡體 -->
+                        <div class="col-md-6 col-lg-4 bg-white d-flex flex-column d-flex feedback"
+                            style="padding: 32px;border-radius: .5rem;--tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06); box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);">
+                            <!-- 說明 -->
+                            <h2 class=""
+                                style="font-weight: 500;font-size: 1.125rem;line-height: 1.75rem;margin-bottom: .25rem;">
+                                Feedback
+                            </h2>
+                            <p class="" style="margin-bottom: 1.25rem;line-height: 1.625;color: rgb(103,111,123);">
+                                Post-ironic portland shabby chic echo park, banjo fashion axe
+                            </p>
+                            <!-- 填入信箱 -->
+                            <div class="d-flex flex-column" style="margin-bottom:16px;">
+                                <label for="email" class=""
+                                    style="line-height: 1.75rem;font-size: .875rem;color: rgb(103,111,123);">
+                                    Email
+                                </label>
+                                <input type="email" id="email" name="email" class="bg-white">
+                            </div>
+                            <!-- 填入意見 -->
+                            <div class="d-flex flex-column" style="margin-bottom:18px ;">
+                                <label for="message" class=""
+                                    style="line-height: 1.75rem;font-size: .875rem;color: rgb(103,111,123);">
+                                    Message
+                                </label>
+                                <textarea type="text" id="message" name="message" class=" bg-white "></textarea>
+                            </div>
+                            <!-- 送出按鈕 -->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block"
+                                style=" background-color: rgb(99,102,241); margin-bottom: 12px;">
+                                Button
+                            </button>
+                            <p class=""
+                                style="font-size: .75rem; line-height: 1rem; margin-bottom: 0;color: rgb(103,111,123);">
+                                Chicharrones blog helvetica normcore iceland tousled brook viral artisan.
+                            </p>
                         </div>
-                        <!-- 填入意見 -->
-                        <div class="d-flex flex-column" style="margin-bottom:18px ;">
-                            <label for="message" class=""
-                                style="line-height: 1.75rem;font-size: .875rem;color: rgb(103,111,123);">
-                                Message
-                            </label>
-                            <textarea id="message" name="message" class=" bg-white ">
-                            </textarea>
-                        </div>
-                        <!-- 送出按鈕 -->
-                        <button type="button" class="btn btn-primary btn-lg btn-block"
-                            style=" background-color: rgb(99,102,241); margin-bottom: 12px;">
-                            Button
-                        </button>
-                        <p class=""
-                            style="font-size: .75rem; line-height: 1rem; margin-bottom: 0;color: rgb(103,111,123);">
-                            Chicharrones blog helvetica normcore iceland tousled brook viral artisan.
-                        </p>
                     </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </main>
