@@ -43,8 +43,13 @@
 
                         {{-- @can 是綁在 gate身上，通過define(是admin)才能使用 --}}
                         {{-- @can('admin') --}}
-                        <li class="nav-item">
-                            <a href="{{asset('/admin/news')}}" class="nav-link">最新消息</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">最新消息管理</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ asset('/admin/news/type') }}">最新消息種類</a>
+                                <a class="dropdown-item" href="{{ asset('/admin/news/item') }}">最新消息項目</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"

@@ -29,6 +29,8 @@ Route::prefix('/cart')->group(function (){
     Route::get('/cartD','FrontController@cartD');
 });
 
+
+
 // 後端
 // Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
 // });
@@ -37,10 +39,10 @@ Route::get('/admin', 'HomeController@index')->name('home');
 Route::get('/admin/home', 'HomeController@index')->name('home');
 
 
+// 產品管理
 Route::prefix('/admin/product')->group(function () {
-    // 產品管理
+    // 產品種類管理
     Route::prefix('/type')->group(function () {
-        // 產品種類管理
         Route::get('/', 'ProductTypeController@index');
         Route::get('/create', 'ProductTypeController@create');
         Route::post('/store', 'ProductTypeController@store');
@@ -50,8 +52,8 @@ Route::prefix('/admin/product')->group(function () {
     });
 
 
+    // 產品品項管理
     Route::prefix('/item')->group(function () {
-        // 產品品項管理
         Route::get('/', 'ProductController@index');
         Route::get('/create', 'ProductController@create');
         Route::post('/store', 'ProductController@store');
@@ -62,6 +64,7 @@ Route::prefix('/admin/product')->group(function () {
     });
 });
 
+// 聯絡我們管理
 Route::prefix('/admin/contactus')->group(function (){
     Route::get('/','ContactUsController@index');
     Route::post('/store','ContactUsController@store');
@@ -69,4 +72,25 @@ Route::prefix('/admin/contactus')->group(function (){
     Route::delete('/delete/{id}', 'ContactUsController@delete');
 });
 
+// 最新消息管理
+Route::prefix('/admin/news')->group(function () {
 
+    Route::prefix('/type')->group(function () {
+        Route::get('/', 'NewsTypeController@index');
+        Route::get('/create', 'NewsTypeController@create');
+        Route::post('/store', 'NewsTypeController@store');
+        Route::get('/edit/{id}', 'NewsTypeController@edit');
+        Route::post('/update/{id}', 'NewsTypeController@update');
+        Route::delete('/delete/{id}', 'NewsTypeController@delete');
+    });
+
+
+    Route::prefix('/item')->group(function () {
+        Route::get('/', 'NewsController@index');
+        Route::get('/create', 'NewsController@create');
+        Route::post('/store', 'NewsController@store');
+        Route::get('/edit/{id}', 'NewsController@edit');
+        Route::post('/update/{id}', 'NewsController@update');
+        Route::delete('/delete/{id}', 'NewsController@delete');
+    });
+});
