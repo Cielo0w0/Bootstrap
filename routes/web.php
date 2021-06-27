@@ -36,6 +36,9 @@ Route::prefix('/cart')->group(function (){
 Route::get('/admin', 'HomeController@index')->name('home');
 Route::get('/admin/home', 'HomeController@index')->name('home');
 
+
+
+
 Route::prefix('/admin/product')->group(function () {
     // 產品管理
     Route::prefix('/type')->group(function () {

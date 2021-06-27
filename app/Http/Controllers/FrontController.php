@@ -12,11 +12,10 @@ class FrontController extends Controller
         $lists = Product::get();
         $top_product = Product::where('top', 1)->first();
         $color = Product::COLOR;
-       
+
         return view('front.index', compact('lists', 'top_product'));
     }
-
-
+    // ->orWhere('sort','')
 
     public function register()
     {

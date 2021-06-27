@@ -56,6 +56,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="photos">產品其他圖片</label>
+                            <input type="file" multiple class="form-control" id="photos" name="photos[]">
+                        </div>
+
+                        <div class="form-group">
                             <label for="product_type_id">產品種類</label>
                             <select class="form-control" id="product_type_id" name="product_type_id">
                                 @foreach ($type as $item)

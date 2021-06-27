@@ -26,13 +26,19 @@ class Product extends Model
         return $this->hasOne('App\ProductType','id','product_type_id');
     }
 
+    public function photos(){
+        return $this->hasMany('App\ProductImg','product_id','id');
+    }
+
+
+
+
     // 只要有資料透過 Model 進行存取(新增/修改/使用)
 
     public function setSizeAttribute($vaule){
         $this->attributes['size'] = json_encode($vaule);
     }
-
-
+    
     // public function getSizeAttribute($vaule){
     //     return $this->attributes['size'] = json_decode($vaule);
     // }

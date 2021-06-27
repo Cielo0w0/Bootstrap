@@ -79,9 +79,29 @@
 
                         <hr>
 
+                        <div class="form-group row">
+                            <label class="col-12" for="">產品其他圖片</label>
+                            @foreach ($record->photos as $photo)
+                            <div class="col-md-3">
+                                {{-- 點選到圖片刪除按鈕時，將該圖片的ID記錄下來，傳到後端 --}}
+                                {{-- 後端根據ID找到該筆資料，進行刪除 --}}
+                                <div data-id="{{ $photo->id }}" class="del-img-btn">x</div>
+                                <img class="w-100" src="{{ $photo->photo }}" alt="">
+                            </div>
+                            @endforeach
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photos">新增產品其他圖片</label>
+                            <input type="file" class="form-control" id="photos" name="photos[]" multiple>
+                        </div>
+
+
+                        <hr>
+
                         <div class="form-group">
                             <label for="product_type_id">產品種類</label>
-                            <select class="form-control" id="product_type_id" name="product_type_id">
+                            <select class="form-control" id="product_type_id" name="product_type_id" required>
                                 @foreach ($type as $item)
                                 <option @if($item->id === $record->type->id ) selected @endif
                                     value="{{ $item->id }}">{{ $item->type_name }}</option>
@@ -92,13 +112,13 @@
                         <div class="form-group">
                             <label for="product_name">產品名稱</label>
                             <input type="text" class="form-control" id="product_name" name="product_name"
-                                value="{{ $record->product_name }}">
+                                value="{{ $record->product_name }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="discript">產品介紹</label>
                             <textarea class="form-control" name="discript" id="discript" cols="30"
-                                rows="10">{{ $record->discript }}</textarea>
+                                rows="10" required>{{ $record->discript }}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -129,7 +149,7 @@
                         <div class="form-group">
                             <label for="price">價格</label>
                             <input type="text" class="form-control" id="price" name="price"
-                                value="{{ $record->price }}">
+                                value="{{ $record->price }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">編輯</button>
@@ -143,62 +163,35 @@
 
 @section('js')
 <script>
-    // jquery
-    // $('.del-img-btn').click(function(){
-    //     var id = $(this).attr('data-id')
-    //     var parent_element = $(this).parent();
-
-    //     var formdata = new FormData();
-    //     // append('key',vaule)，有幾筆資料就要做append幾次
-    //     formdata.append('id',id)
-    //     formdata.append('_token','{{ csrf_token() }}')
-
-    //     var yes = confirm('是否確認刪除此圖片?')
-    //     if (yes) {
-    //         fetch('/admin/product/item/deleteImage',{
-    //             'method' : 'post',
-    //             'body':formdata
-    //         }).then(function(response){
-    //             return response.text(); //text = 'success'
-    //         }).then(function(result){
-    //             if (result=='success') {
-    //                 alert('刪除成功!')
-    //                 parent_element.remove();
-    //             }
-    //         });
-    //     }
-    // })
-
-
     // js
-    // var del_btns = document.querySelectorAll('.del-img-btn');
-    // del_btns.forEach(function(delbtn){
-    //     delbtn.addEventListener('click',function(){
-    //         var id = this.getAttribute('data-id');
-    //         var parent_element = this.parentElement;
+    var del_btns = document.querySelectorAll('.del-img-btn');
+    del_btns.forEach(function(delbtn){
+        delbtn.addEventListener('click',function(){
+            var id = this.getAttribute('data-id');
+            var parent_element = this.parentElement;
 
-    //         var formdata = new FormData();
-    //         formdata.append('_token','{{  csrf_token()  }}');
-    //         formdata.append('id',id);
+            var formdata = new FormData();
+            formdata.append('_token','{{  csrf_token()  }}');
+            formdata.append('id',id);
 
-    //         var yes = confirm('是否確認刪除此圖片?')
-    //         if (yes) {
-    //             fetch('/admin/product/item/deleteImage',{
-    //                 'method' : 'POST',
-    //                 'body':formdata
-    //             })
-    //             .then(function(response){
-    //                 return response.text();
-    //             })
-    //             .then(function(result){
-    //                 if (result=='success') {
-    //                     alert('刪除成功!')
-    //                     parent_element.remove();
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
+            var yes = confirm('是否確認刪除此圖片?')
+            if (yes) {
+                fetch('/admin/product/item/deleteImage',{
+                    'method' : 'POST',
+                    'body':formdata
+                })
+                .then(function(response){
+                    return response.text();
+                })
+                .then(function(result){
+                    if (result=='success') {
+                        alert('刪除成功!')
+                        parent_element.remove();
+                    }
+                });
+            }
+        });
+    });
 
 
 </script>

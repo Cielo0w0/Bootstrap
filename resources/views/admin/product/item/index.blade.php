@@ -35,7 +35,8 @@
                     <table id="my-datatable" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>是否置頂</th>
+                                <th style="width:30px">是否置頂</th>
+                                <th>排序</th>
                                 <th>圖片</th>
                                 <th>產品種類</th>
                                 <th>產品名稱</th>
@@ -57,6 +58,7 @@
                                     否
                                     @endif
                                 </td>
+                                <td>{{ $item->sort??''}}</td>
                                 <td>{{ $item->photo??''}}</td>
                                 <td>{{ $item->type->type_name??''}}</td>
                                 <td>{{ $item->product_name }}</td>
@@ -94,6 +96,7 @@
                         <tfoot>
                             <tr>
                                 <th>是否置頂</th>
+                                <th>排序</th>
                                 <th>圖片</th>
                                 <th>產品種類</th>
                                 <th>產品名稱</th>
