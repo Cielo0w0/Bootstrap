@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\News;
 use App\Product;
+use App\ProductType;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -18,18 +19,54 @@ class FrontController extends Controller
 
         return view('front.index', compact('lists', 'top_product','newslists'));
     }
-    // ->orWhere('sort','')
 
-    public function register()
+
+    // get也可以留參數!
+    public function product(Request $request)
+    // public function product()
     {
-        return view('front.register');
+        $types = ProductType::get();
+
+        if ($request->type_id) {
+            $products =Product::where('product_type_id',$request->type_id)->get();
+        }else{
+            $products = Product::get();
+        }
+
+        return view('/front/product/index', compact('products', 'types'));
     }
+
+
+    public function add(Request $request)
+    {
+        $product = Product::find($request->productId);
+        \Cart::add(array(
+            'id' => $product->id,
+            'name' => $product->product_name,
+            'price' => $product->price,
+            'quantity' => 1,
+            'attributes' => array(
+                'photo'=>$product->photo
+            )
+        ));
+
+        return 'success';
+    }
+
+    public function content()
+    {
+        $cartCollection = \Cart::getContent();
+        dd( $cartCollection);
+    }
+
+
 
 
 
     public function cartA()
     {
-        return view('front.cart.shoppingcart_A');
+        $cartProducts =\Cart::getContent();
+        return view('front.cart.shoppingcart_A',compact('cartProducts'));
     }
 
 
@@ -52,4 +89,14 @@ class FrontController extends Controller
     {
         return view('front.cart.shoppingcart_D');
     }
+
+
+
+
+
+    public function register()
+    {
+        return view('front.register');
+    }
+
 }

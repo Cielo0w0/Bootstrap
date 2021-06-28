@@ -21,13 +21,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // 前端
 Route::get('/','FrontController@index');
+
 Route::get('/register','FrontController@register');
+
 Route::prefix('/cart')->group(function (){
     Route::get('/cartA','FrontController@cartA');
     Route::get('/cartB','FrontController@cartB');
     Route::get('/cartC','FrontController@cartC');
     Route::get('/cartD','FrontController@cartD');
+
+    Route::post('/add','FrontController@add');
+    Route::get('/content','FrontController@content');
+    Route::get('/clear','FrontController@clear');
+    Route::post('/update','FrontController@update');
 });
+
+Route::get('/product','FrontController@product');
 
 
 

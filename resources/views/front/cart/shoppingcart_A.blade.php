@@ -51,17 +51,16 @@
 <!-- border-top-width: 1px; -->
 <div class="list">
     <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;margin: 20px 0 0 0 ;">訂單明細</h2>
-    <!-- 第一層 -->
+    @foreach ( $cartProducts as $product)
+
     <div id="product" class="item-1 d-flex justify-content-between" style="padding-top:24px ;margin-top: 24px;">
         <!-- 左邊資訊 -->
         <div class="d-flex align-items-center ">
-            <img src="{{ asset ('https://i.imgur.com/EEguU02.jpg') }}" class=""
-                style="width: 60px; height: 60px; border-radius: 50%;">
+            <img src="{{$product->attributes->photo}}" class="" style="width: 60px; height: 60px; border-radius: 50%;">
 
             <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
-                <span class="" style="font-weight: 500;">Chicken momo</span>
-                <span class=""
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#41551</span>
+                <span class="" style="font-weight: 500;">{{$product->name}}</span>
+                {{-- <span class="" style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#41551</span> --}}
             </div>
         </div>
         <!-- 右邊資訊 -->
@@ -71,7 +70,8 @@
                 <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
                     -
                 </div>
-                <input id="number" type="number" class="input1" value="1"
+                <input id="number" type="number" class="input1" value="{{$product->quantity }}"
+                    data-price="{{ $product->price }}" data-id="{{ $product->id }}"
                     style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
                 <div id="add-btn" class="font-semibold add-btn" style="font-weight: 600;cursor: pointer;">
                     +
@@ -81,80 +81,13 @@
             <div class="pr-8 d-flex  justify-content-center align-items-center">
                 <div id="price" class="price1"
                     style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 39px;"
-                    data-price="10.50">$10.50</div>
+                    data-price="{{ $product->price }}">{{ $product->price * $product->quantity}}</div>
             </div>
         </div>
     </div>
+    @endforeach
 
-    <!-- 第二層 -->
-    <div id="product" class="item-2 d-flex justify-content-between"
-        style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-        <!-- 左邊資訊 -->
-        <div class="d-flex align-items-center ">
-            <img src="https://i.imgur.com/Uv2Yqzo.jpg" class="" style="width: 60px; height: 60px; border-radius: 50%;">
 
-            <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
-                <span class="" style="font-weight: 500;">Spicy Mexican potatoes</span>
-                <span class=""
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#66999</span>
-            </div>
-        </div>
-        <!-- 右邊資訊 -->
-        <div class="d-flex ">
-            <!-- 數量 -->
-            <div class="d-flex justify-content-center align-items-center" style="padding-right: 32px;">
-                <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
-                    -
-                </div>
-                <input id="number" type="number" class="input2" value="1"
-                    style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
-                <div id="add-btn" class="font-semibold add-btn" style="font-weight: 600;cursor: pointer;">
-                    +
-                </div>
-            </div>
-            <!-- 價格 -->
-            <div class="pr-8 d-flex  justify-content-center align-items-center">
-                <div id="price" class="price2"
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 500;width: 31px;margin-right: 39px; "
-                    data-price="15.50">$15.50</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 第三層 -->
-    <div id="product" class="item-3 d-flex justify-content-between"
-        style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-        <!-- 左邊資訊 -->
-        <div class="d-flex align-items-center ">
-            <img src="https://i.imgur.com/xbTAITF.jpg" class="" style="width: 60px; height: 60px; border-radius: 50%;">
-
-            <div class="d-flex flex-column align-items-start justify-content-center " style="margin-left: 12px;">
-                <span class="" style="font-weight: 500;">Breakfast</span>
-                <span class=""
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 300;color: rgba(156,163,175);">#86577</span>
-            </div>
-        </div>
-        <!-- 右邊資訊 -->
-        <div class="d-flex ">
-            <!-- 數量 -->
-            <div class="d-flex justify-content-center align-items-center" style="padding-right: 32px;">
-                <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
-                    -
-                </div>
-                <input id="number" type="number" class="input3" value="1"
-                    style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
-                <div id="add-btn" class="font-semibold add-btn" style="font-weight: 600;cursor: pointer;">
-                    +
-                </div>
-            </div>
-            <!-- 價格 -->
-            <div class="pr-8 d-flex  justify-content-center align-items-center">
-                <div id="price" class="price3"
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 500;width: 31px;margin-right: 39px;"
-                    data-price="20.50"> $20.50</div>
-            </div>
-        </div>
-    </div>
 
     <!-- 總結帳 -->
     <div class="count d-flex justify-content-end flex-column align-items-end"
@@ -205,6 +138,34 @@
         </a>
     </div>
 </div>
-</div>
-</main>
+@endsection
+
+@section('js')
+<script>
+
+    
+    // 送資料去購物車
+    var formData = new FormData();
+    formData.append('_token','{{ csrf_token() }}');
+    formData.append('productId',input.getAttribute('data-id'));
+    formData.append('newQty',newQty);
+
+    fetch('/cart/update',{
+        'method':'post',
+        'body':formData
+    }).then(function(response){
+        return response.text();
+    }).then(function(result){
+      if(result=='sucess'){
+        if (newQty<1) {
+            input.value = 1;
+        } else {
+            input.value = newQty;
+        }
+        var price = qtyArea.nextElementiSidling;
+        price.innerText = '$'+(price.getAttribute('data-price')*input)
+      }
+    })
+
+</script>
 @endsection

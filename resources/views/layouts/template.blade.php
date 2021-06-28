@@ -2,24 +2,22 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> @yield('title') </title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- Bootstrap CDN--}}
+    
+    <title> @yield('page-title')</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    {{-- font-awesome cdn CDN--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
-    {{-- Our CSS --}}
-    <link rel="stylesheet" href="{{asset('/css/shoppingcart_A.css')}}">
-    @yield('css')
+    <link rel="stylesheet" href="/css/index.css">
 
+    @yield('css')
 </head>
 
 <body>
@@ -48,32 +46,35 @@
                     style="color: rgb(55,65,81);">Contact</a>
 
                 <div class="i-con">
-                    <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
-                    <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    <a href="{{ asset('/cart/cartA') }}">
+                        <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
+                    </a>
+                    <a href="{{ asset('/register') }}">
+                        <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
-
-    <!-- main -->
-    <main style="width: 100%; min-height: 966px;background-color: rgb(209,213,219);padding: 48px 0;">
-        <div class="shopping-car mx-auto" style="background-color: rgb(243,244,246);border-radius: .5rem;padding: 40px;--tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);">
-            <!-- 標題 -->
-            <h1 class="" style="font-size: 1.875rem; line-height: 2.25rem;font-weight: 700;margin: 0;">購物車</h1>
-
-            @yield('step')
-
-            @yield('content')
+    <main>
+        @if (Session::has('message'))
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('message') }}
+            </div>
         </div>
+        @endif
 
+        @yield('step')
 
+        @yield('main')
+
+        @yield('content')
     </main>
 
-
-    <!-- footer -->
-    <div class="footer introduce-container mx-auto" style="padding:96px 20px;">
+    <!-- footer ok -->
+    <div class="footer introduce-container" style="padding:96px 20px;">
         <div class="footer-up d-flex flex-column flex-md-row  justify-content-start">
 
             <!-- 公司名稱 -->
@@ -241,7 +242,9 @@
         </div>
     </div>
 
-    {{-- JS CDN--}}
+
+    {{-- Scripts --}}
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -252,7 +255,19 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
     </script>
 
-    {{-- <script src="{{ asset('/js/layout.js') }}"></script> --}}
+    <Script>
+        var navbar_toggler = document.querySelector('.navbar-toggler')
+        var navbar_collapse = document.querySelector('.navbar-collapse')
+
+    navbar_toggler.onclick = function () {
+        if (navbar_collapse.classList.contains('show')) {
+            navbar_toggler.innerHTML = `<i class="fas fa-bars" ></i>`
+        } else {
+            navbar_toggler.innerHTML = `<i class="fas fa-times"></i>`
+        }
+    }
+    </Script>
+
     @yield('js')
 </body>
 
