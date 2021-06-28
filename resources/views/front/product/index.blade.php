@@ -61,7 +61,7 @@
             }).then(function(response){
                 return response.text();
             }).then(function(result){
-                if(result==='success'){
+                if(result=='success'){
                     alert('加入成功')
                 }
             });

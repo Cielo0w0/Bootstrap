@@ -15,9 +15,9 @@ class FrontController extends Controller
         $top_product = Product::where('top', 1)->first();
         $color = Product::COLOR;
 
-        $newslists=News::get();
+        $newslists = News::get();
 
-        return view('front.index', compact('lists', 'top_product','newslists'));
+        return view('front.index', compact('lists', 'top_product', 'newslists'));
     }
 
 
@@ -28,8 +28,8 @@ class FrontController extends Controller
         $types = ProductType::get();
 
         if ($request->type_id) {
-            $products =Product::where('product_type_id',$request->type_id)->get();
-        }else{
+            $products = Product::where('product_type_id', $request->type_id)->get();
+        } else {
             $products = Product::get();
         }
 
@@ -37,53 +37,23 @@ class FrontController extends Controller
     }
 
 
-    public function add(Request $request)
-    {
-        $product = Product::find($request->productId);
-        \Cart::add(array(
-            'id' => $product->id,
-            'name' => $product->product_name,
-            'price' => $product->price,
-            'quantity' => 1,
-            'attributes' => array(
-                'photo'=>$product->photo
-            )
-        ));
 
-        return 'success';
-    }
-
-    public function content()
-    {
-        $cartCollection = \Cart::getContent();
-        dd( $cartCollection);
-    }
-
-
-
-
-
+    // 購物車  --------------------------------------
     public function cartA()
     {
-        $cartProducts =\Cart::getContent();
-        return view('front.cart.shoppingcart_A',compact('cartProducts'));
+        $cartProducts = \Cart::getContent();
+        return view('front.cart.shoppingcart_A', compact('cartProducts'));
     }
-
-
 
     public function cartB()
     {
         return view('front.cart.shoppingcart_B');
     }
 
-
-
     public function cartC()
     {
         return view('front.cart.shoppingcart_C');
     }
-
-
 
     public function cartD()
     {
@@ -94,9 +64,41 @@ class FrontController extends Controller
 
 
 
+    // 註冊  --------------------------------------
     public function register()
     {
         return view('front.register');
     }
 
+
+
+
+    // 其他  --------------------------------------
+    public function add(Request $request)
+    {
+        $product = Product::find($request->productId);
+        \Cart::add(array(
+            'id' => $product->id,
+            'name' => $product->product_name,
+            'price' => $product->price,
+            'quantity' => 1,
+            'attributes' => array(
+                'photo' => $product->photo
+            )
+        ));
+
+        return 'success';
+    }
+
+    public function content()
+    {
+        $cartCollection = \Cart::getContent();
+        dd($cartCollection);
+    }
+
+    public function clear()
+    {
+        \Cart::clear();
+        return 'sucess';
+    }
 }

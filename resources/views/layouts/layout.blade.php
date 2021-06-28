@@ -26,7 +26,7 @@
     <!-- NAV -->
     <nav class="nav-container navbar navbar-expand-lg navbar-light mx-auto d-flex align-items-center "
         style="z-index: 10;">
-        <a class="navbar-brand" href="">
+        <a class="navbar-brand" href="{{ asset('/') }}">
             <img src="{{ asset('/img/logo.svg') }}" alt="">
         </a>
 
@@ -48,8 +48,12 @@
                     style="color: rgb(55,65,81);">Contact</a>
 
                 <div class="i-con">
-                    <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
-                    <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    <a href="{{ asset('/cart/cartA') }}">
+                        <i class="shopping-cart fas fa-shopping-cart" style="color: rgb(55,65,81);"></i>
+                    </a>
+                    <a href="{{ asset('/register') }}">
+                        <i class="customer fas fa-user-circle" style="color: rgb(55,65,81);"></i>
+                    </a>
                 </div>
             </div>
         </div>

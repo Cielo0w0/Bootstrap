@@ -67,21 +67,31 @@
         <div class="d-flex ">
             <!-- 數量 -->
             <div class="d-flex justify-content-center align-items-center" style="padding-right: 32px;">
-                <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
+                <button type="button" class="btn minus-btn">-</button>
+
+                <input type="number"  value="{{$product->quantity }}" style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
+                    {{-- data-price="{{ $product->price }}" data-id="{{ $product->id }}" --}}
+                <button type="button" class="btn  plus-btn">+</button>
+
+                {{-- <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
                     -
                 </div>
                 <input id="number" type="number" class="input1" value="{{$product->quantity }}"
-                    data-price="{{ $product->price }}" data-id="{{ $product->id }}"
-                    style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
+                data-price="{{ $product->price }}" data-id="{{ $product->id }}"
+                style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height:
+                1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color:
+                #e5e7eb;text-align:center">
                 <div id="add-btn" class="font-semibold add-btn" style="font-weight: 600;cursor: pointer;">
                     +
-                </div>
+                </div> --}}
             </div>
             <!-- 價格 -->
             <div class="pr-8 d-flex  justify-content-center align-items-center">
-                <div id="price" class="price1"
+                <div class="price1 ml-1"
                     style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 39px;"
-                    data-price="{{ $product->price }}">{{ $product->price * $product->quantity}}</div>
+                    data-price="{{ $product->price }}">${{ $product->price}}
+                </div>
+                {{-- * $product->quantity --}}
             </div>
         </div>
     </div>
@@ -142,30 +152,56 @@
 
 @section('js')
 <script>
+    var plusBtns = document.querySelectorAll('.plus-btn')
+    plusBtns.forEach(function(plusBtn){
+        plusBtn.addEventListener('click',function(){
+            var qtyArea = this.parentElement;
+            var input = qtyArea.querySelector('input');
+            var qty = Number(input.value);
+            input.value =  qty +1;
 
-    
-    // 送資料去購物車
-    var formData = new FormData();
-    formData.append('_token','{{ csrf_token() }}');
-    formData.append('productId',input.getAttribute('data-id'));
-    formData.append('newQty',newQty);
+            var price =  qtyArea.nextElementSibling;
+            price.innerText= '$'+ (price.getAttribute('data-price') * input.value);
+        });
+    });
 
-    fetch('/cart/update',{
-        'method':'post',
-        'body':formData
-    }).then(function(response){
-        return response.text();
-    }).then(function(result){
-      if(result=='sucess'){
-        if (newQty<1) {
-            input.value = 1;
-        } else {
-            input.value = newQty;
-        }
-        var price = qtyArea.nextElementiSidling;
-        price.innerText = '$'+(price.getAttribute('data-price')*input)
-      }
-    })
+    var minusBtns = document.querySelectorAll('.minus-btn')
+    minusBtns.forEach(function(minusBtn){
+        minusBtn.addEventListener('click',function(){
+            var qtyArea = this.parentElement;
+            var input = qtyArea.querySelector('input');
+            var qty = Number(input.value)
+
+            if (qty >1) {
+            input.value = qty -1
+           }
+        });
+    });
+
+
+
+    // // 送資料去購物車
+    // var formData = new FormData();
+    // formData.append('_token','{{ csrf_token() }}');
+    // formData.append('productId',input.getAttribute('data-id'));
+    // formData.append('newQty',newQty);
+
+    // fetch('/cart/update',{
+    //     'method':'post',
+    //     'body':formData
+    // }).then(function(response){
+    //     return response.text();
+    // }).then(function(result){
+    //   if(result=='sucess'){
+    //     if (newQty<1) {
+    //         input.value = 1;
+    //     } else {
+    //         input.value = newQty;
+    //     }
+    //     var price = qtyArea.nextElementiSidling;
+    //     price.innerText = '$'+(price.getAttribute('data-price')*input)
+    //   }
+    // })
 
 </script>
 @endsection
