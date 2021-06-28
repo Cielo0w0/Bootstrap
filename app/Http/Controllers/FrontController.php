@@ -41,7 +41,7 @@ class FrontController extends Controller
     // 購物車  --------------------------------------
     public function cartA()
     {
-        $cartProducts = \Cart::getContent();
+        $cartProducts = \Cart::getContent()->sortKeys();
         return view('front.cart.shoppingcart_A', compact('cartProducts'));
     }
 
@@ -90,6 +90,17 @@ class FrontController extends Controller
         return 'success';
     }
 
+    public function update(Request $request)
+    {
+        \Cart::update($request->productId, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->newQty
+            ),
+        ));
+        return 'success';
+    }
+
     public function content()
     {
         $cartCollection = \Cart::getContent();
@@ -101,4 +112,5 @@ class FrontController extends Controller
         \Cart::clear();
         return 'sucess';
     }
+
 }

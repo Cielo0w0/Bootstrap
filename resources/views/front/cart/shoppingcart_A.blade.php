@@ -50,10 +50,11 @@
 <!-- 訂單明細-->
 <!-- border-top-width: 1px; -->
 <div class="list">
-    <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;margin: 20px 0 0 0 ;">訂單明細</h2>
-    @foreach ( $cartProducts as $product)
+    <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;margin: 20px 0 48px 0 ;">訂單明細</h2>
 
-    <div id="product" class="item-1 d-flex justify-content-between" style="padding-top:24px ;margin-top: 24px;">
+    @foreach ( $cartProducts as $product)
+    <div id="product" class="item-1 d-flex justify-content-between"
+        style="padding-bottom:24px ;margin-bottom: 24px;border-width:  0 0 1px 0 ; border-style: solid; border-color: #e5e7eb;">
         <!-- 左邊資訊 -->
         <div class="d-flex align-items-center ">
             <img src="{{$product->attributes->photo}}" class="" style="width: 60px; height: 60px; border-radius: 50%;">
@@ -66,32 +67,17 @@
         <!-- 右邊資訊 -->
         <div class="d-flex ">
             <!-- 數量 -->
-            <div class="d-flex justify-content-center align-items-center" style="padding-right: 32px;">
-                <button type="button" class="btn minus-btn">-</button>
-
-                <input type="number"  value="{{$product->quantity }}" style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
-                    {{-- data-price="{{ $product->price }}" data-id="{{ $product->id }}" --}}
-                <button type="button" class="btn  plus-btn">+</button>
-
-                {{-- <div id="minus" class="font-semibold minus" style="font-weight: 600;cursor: pointer;">
-                    -
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="quantity" style="padding-right: 32px;">
+                    <button type="button" class="btn minus-btn" style="padding:0">-</button>
+                    <input type="number" value="{{$product->quantity}}" data-price="{{$product->price}}"
+                        data-id="{{$product->id}}" class="qty-input"
+                        style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
+                    <button type="button" class="btn  plus-btn" style="padding:0">+</button>
                 </div>
-                <input id="number" type="number" class="input1" value="{{$product->quantity }}"
-                data-price="{{ $product->price }}" data-id="{{ $product->id }}"
-                style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height:
-                1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color:
-                #e5e7eb;text-align:center">
-                <div id="add-btn" class="font-semibold add-btn" style="font-weight: 600;cursor: pointer;">
-                    +
-                </div> --}}
-            </div>
-            <!-- 價格 -->
-            <div class="pr-8 d-flex  justify-content-center align-items-center">
-                <div class="price1 ml-1"
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 39px;"
-                    data-price="{{ $product->price }}">${{ $product->price}}
+                <div class="price ml-1" data-price="{{$product->price}}"
+                    style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 39px;">$ {{number_format($product->price * $product->quantity)}}
                 </div>
-                {{-- * $product->quantity --}}
             </div>
         </div>
     </div>
@@ -101,7 +87,7 @@
 
     <!-- 總結帳 -->
     <div class="count d-flex justify-content-end flex-column align-items-end"
-        style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
+        style="margin-top: 24px;border-width: 0px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
         <div class="d-flex justify-content-between align-items-center w-25">
             <div class=""
                 style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">
@@ -152,32 +138,91 @@
 
 @section('js')
 <script>
+    function updateQty(element,number){
+        var qtyArea = element.parentElement;
+        var input = qtyArea.querySelector('input');
+        var qty = Number(input.value);
+        var newQty =  qty + number;
+
+
+        // 送資料到購物車
+        var formData = new FormData();
+        formData.append('_token','{{ csrf_token() }}');
+        formData.append('productId',input.getAttribute('data-id'));
+        formData.append('newQty',newQty);
+
+        fetch('/cart/update',{
+            'method':'post',
+            'body':formData
+        }).then(function(response){
+            return response.text();
+        }).then(function(result){
+            if(result=="success"){
+                if (newQty < 1) {
+                    input.value=1
+                }else{
+                    input.value=newQty
+                }
+                var price =  qtyArea.nextElementSibling;
+                price.innerText= '$'+(price.getAttribute('data-price') * input.value).toLocaleString();
+            }
+        })
+    }
+
+
+
+    function updateShoppingCart(params){
+        // var totalQty = document.querySelector('total-number')
+        // var subTotal = document.querySelector('amount')
+        // var shipping = document.querySelector('shipping-fee')
+        // var total = document.querySelector('total-amount')
+
+        var totalQty = 0;
+        var subTotal = 0;
+        var shipping = 0;
+        var total = 0;
+
+        var inputs = document.querySelectorAll('.qty-input');
+        inputs.forEach(function(input){
+            totalQty += Number(input.value);
+            subTotal += Number(input.value) * input.getAttribute('data-price');
+        })
+        document.querySelector('.total-number').innerText = totalQty;
+        document.querySelector('.amount').innerText = '$'+subTotal.toLocaleString();
+
+        if (subTotal>1000) {
+            shipping = 0;
+        } else {
+            shipping = 60;
+        }
+        document.querySelector('.shipping-fee').innerText = shipping;
+
+        total=subTotal+shipping;
+        document.querySelector('.total-amount').innerText =  total.toLocaleString();
+
+    }
+
+
     var plusBtns = document.querySelectorAll('.plus-btn')
     plusBtns.forEach(function(plusBtn){
         plusBtn.addEventListener('click',function(){
-            var qtyArea = this.parentElement;
-            var input = qtyArea.querySelector('input');
-            var qty = Number(input.value);
-            input.value =  qty +1;
-
-            var price =  qtyArea.nextElementSibling;
-            price.innerText= '$'+ (price.getAttribute('data-price') * input.value);
+            updateQty(this,1)
+            updateShoppingCart()
+            console.log(totalQty);
         });
     });
 
     var minusBtns = document.querySelectorAll('.minus-btn')
     minusBtns.forEach(function(minusBtn){
         minusBtn.addEventListener('click',function(){
-            var qtyArea = this.parentElement;
-            var input = qtyArea.querySelector('input');
-            var qty = Number(input.value)
-
-            if (qty >1) {
-            input.value = qty -1
-           }
+            updateQty(this,-1)
+            updateShoppingCart()
         });
     });
 
+    window.addEventListener('load',function(){
+        updateShoppingCart()
+    });
 
 
     // // 送資料去購物車
