@@ -126,7 +126,7 @@
         style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
         <div class="d-flex align-items-center ">
             <i class="fa fa-arrow-left" style="padding-right: .5rem;"></i>
-            <a herf="" class="text-md font-medium text-black-400 ">返回購物</a>
+            <a herf="{{asset('/product')}}" class="text-md font-medium text-black-400 ">返回購物</a>
         </div>
         <a href="{{ asset('/cart/cartB') }}">
             <button type="button" class="btn btn-primary btn-lg"
@@ -165,6 +165,7 @@
                 }
                 var price =  qtyArea.nextElementSibling;
                 price.innerText= '$'+(price.getAttribute('data-price') * input.value).toLocaleString();
+                updateShoppingCart()
             }
         })
     }
@@ -207,8 +208,6 @@
     plusBtns.forEach(function(plusBtn){
         plusBtn.addEventListener('click',function(){
             updateQty(this,1)
-            updateShoppingCart()
-            console.log(totalQty);
         });
     });
 
@@ -216,7 +215,6 @@
     minusBtns.forEach(function(minusBtn){
         minusBtn.addEventListener('click',function(){
             updateQty(this,-1)
-            updateShoppingCart()
         });
     });
 

@@ -25,11 +25,14 @@ Route::get('/','FrontController@index');
 Route::get('/register','FrontController@register');
 
 Route::prefix('/cart')->group(function (){
+    // 購物車頁面
     Route::get('/cartA','FrontController@cartA');
     Route::get('/cartB','FrontController@cartB');
+    Route::post('/cartB/check','FrontController@paymentCheck');
     Route::get('/cartC','FrontController@cartC');
     Route::get('/cartD','FrontController@cartD');
 
+    // 購物車計算
     Route::post('/add','FrontController@add');
     Route::get('/content','FrontController@content');
     Route::get('/clear','FrontController@clear');

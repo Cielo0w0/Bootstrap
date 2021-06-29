@@ -50,100 +50,125 @@
 <div class="list d-flex flex-column"
     style="padding-top:20px ;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
     <!-- 寄送資料:標題 -->
-    <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;">寄送資料
-    </h2>
-    <!-- 姓名 -->
-    <div class="d-flex flex-column w-100">
-        <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
-            姓名
-        </label>
-        <input class="" id="cus_name" name="cus_name" type="text" required="" placeholder="王小明" aria-label="Name"
-            style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
-    </div>
-    <!-- 電話 -->
-    <div class="d-flex flex-column w-100" style="margin-top: 8px;">
-        <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
-            電話
-        </label>
-        <input class="" id="cus_email" name="cus_email" type="text" required="" placeholder="0912345678"
-            aria-label="Email"
-            style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
-    </div>
-    <!-- 信箱 -->
-    <div class="d-flex flex-column w-100" style="margin-top: 8px;">
-        <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
-            Email
-        </label>
-        <input class="" id="cus_email" name="cus_email" type="email" required="" placeholder="abc123@gmail.com"
-            aria-label="Email"
-            style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
-    </div>
-    <!-- 地址 -->
-    <div class="d-flex flex-row w-100" style="margin-top: 8px;">
-        <label class=" " for="cus_address" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
-            地址
-        </label>
-    </div>
-    <div class="input-group">
-        <div class="w-50" style="padding-right:4px ;margin-top:8px ;">
-            <input class=" " id="cus_address" name="cus_address" type="text" required="" placeholder="城市"
-                aria-label="Address"
-                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
+    <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;">寄送資料</h2>
+    <form action="" method="POST">
+        @csrf
+        <!-- 姓名 -->
+        <div class="d-flex flex-column w-100">
+            <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
+                姓名</label>
+            <input class="" id="cus_name" name="cus_name" type="text" required="" placeholder="王小明" aria-label="Name"
+                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
-        <div class="w-50" style="padding-left:4px ; margin-top:8px ;">
-            <input class=" " id="cus_address" name="cus_address" type="text" required="" placeholder="郵遞區號"
-                aria-label="Address"
-                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
+        <!-- 電話 -->
+        <div class="d-flex flex-column w-100" style="margin-top: 8px;">
+            <label class="" for="cus_phone" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;"> 電話
+            </label>
+            <input class="" id="cus_phone" name="cus_phone" type="text" required="" placeholder="0912345678"
+                aria-label="phone"
+                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
-        <div class="w-100" style="margin-top:8px ;">
-            <input class="" id="cus_email" name="cus_email" type="text" required="" placeholder="地址" aria-label="Email"
-                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
+        <!-- 信箱 -->
+        <div class="d-flex flex-column w-100" style="margin-top: 8px;">
+            <label class="" for="cus_email" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
+                Email
+            </label>
+            <input class="" id="cus_email" name="cus_email" type="email" required="" placeholder="abc123@gmail.com"
+                aria-label="Email"
+                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
-    </div>
+        <!-- 地址 -->
+        <div class="d-flex flex-row w-100" style="margin-top: 8px;">
+            <label class=" " for="city" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;"> 地址
+            </label>
+        </div>
+        <div class="input-group city-selector-set">
+            <div class=" " style="padding-right:4px ;margin-top:8px ; width:33.33%">
+                <!-- 縣市選單 -->
+                <select class="county form-control"
+                    style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;"></select>
+                {{-- <input class=" " id="city" name="city" type="text" required="" placeholder="城市" aria-label="Address"
+                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;"> --}}
+            </div>
+            <div class="" style="padding-left:4px ; margin-top:8px ; width:33.33%">
+                <!-- 區域選單 -->
+                <select class="district form-control"
+                    style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;"></select>
+                {{-- <input class=" " id="zip" name="zip" type="text" required="" placeholder="郵遞區號"  aria-label="Address"
+                style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;"> --}}
+            </div>
+            <div class="" style="padding-left:4px ; margin-top:8px ; width:33.33%">
+                <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
+                <input class="zipcode form-control" type="text" size="3" readonly placeholder="郵遞區號">
+            </div>
+            <div class="w-100" style="margin-top:8px ;">
+                <input class="" id="address" name="address" type="text" required="" placeholder="地址" aria-label="Email"
+                    style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;width: 100%;border-style: solid;">
+            </div>
+        </div>
 
-    <!-- 總結帳 -->
-    <div class="count d-flex justify-content-end flex-column align-items-end"
-        style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-        <div class="d-flex justify-content-between align-items-center w-25">
-            <span class=""
-                style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">數量:</span>
-            <span class=""
-                style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">3</span>
+
+        <!-- 總結帳 -->
+        <div class="count d-flex justify-content-end flex-column align-items-end"
+            style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
+            <div class="d-flex justify-content-between align-items-center w-25">
+                <span class=""
+                    style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">數量:</span>
+                <span class=""
+                    style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">{{  $qty }}</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center w-25">
+                <span class=""
+                    style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">小計:</span>
+                <span class=""
+                    style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+                    ${{ number_format($subTotal) }}</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center w-25">
+                <span class=""
+                    style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">運費:</span>
+                <span class=""
+                    style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+                    ${{  $shippingFee }}</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center w-25">
+                <span class=""
+                    style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">總計:</span>
+                <span class=""
+                    style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
+                    ${{ number_format($total) }}</span>
+            </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center w-25">
-            <span class=""
-                style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">小計:</span>
-            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
-                $24.90</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center w-25">
-            <span class=""
-                style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">運費:</span>
-            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
-                $24.90</span>
-        </div>
-        <div class="d-flex justify-content-between align-items-center w-25">
-            <span class=""
-                style="margin-right: .5rem; font-size: .875rem; color: rgba(156,163,175);line-height: 1.25rem;">總計:</span>
-            <span class="" style="color: rgba(31,41,55);font-size: 1.125rem; line-height: 1.75rem;font-weight: 700;">
-                $24.90</span>
-        </div>
-    </div>
-    <!-- 上一步&下一步 -->
-    <div class="next d-flex justify-content-between flex-row align-items-center"
-        style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-        <!-- 上 -->
-        <button type="button" class="btn btn-primary btn-lg"
-            style="padding:0 48px;height: 3rem;border-radius: .25rem;background-color: unset; color: rgb(59,130,246);border-width: 2px;border-style: solid;">
-            上一步
-        </button>
-        <!-- 下 -->
-        <a href="{{ asset('/cart/cartD') }}">
+        <!-- 上一步&下一步 -->
+        <div class="next d-flex justify-content-between flex-row align-items-center"
+            style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
+            <!-- 上 -->
+            <a href="{{ asset('/cart/cartB') }}">
+                <button type="button" class="btn btn-primary btn-lg"
+                    style="padding:0 48px;height: 3rem;border-radius: .25rem;background-color: unset; color: rgb(59,130,246);border-width: 2px;border-style: solid;">
+                    上一步
+                </button>
+            </a>
+            <!-- 下 -->
+            {{-- <a href="{{ asset('/cart/cartD') }}"> --}}
             <button type="button" class="btn btn-primary btn-lg"
                 style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
                 前往付款
             </button>
-        </a>
-    </div>
+            {{-- </a> --}}
+        </div>
+    </form>
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/tw-city-selector.js') }}"></script>
+<script>
+    new TwCitySelector({
+      el: '.city-selector-set',
+      elCounty: '.county', // 在 el 裡查找 element
+      elDistrict: '.district', // 在 el 裡查找 element
+      elZipcode: '.zipcode' // 在 el 裡查找 element
+    });
+</script>
 @endsection

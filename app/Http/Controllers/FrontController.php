@@ -6,6 +6,7 @@ use App\News;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FrontController extends Controller
 {
@@ -45,14 +46,41 @@ class FrontController extends Controller
         return view('front.cart.shoppingcart_A', compact('cartProducts'));
     }
 
+
+
     public function cartB()
     {
-        return view('front.cart.shoppingcart_B');
+        $qty = \Cart::getTotalQuantity();
+        $subTotal = \Cart::getSubTotal();
+        $shippingFee = \Cart::getSubTotal() > 1000 ? 0 : 60;
+        $total =  $subTotal + $shippingFee;
+
+        return view('front.cart.shoppingcart_B', compact('qty', 'subTotal', 'shippingFee', 'total'));
     }
+
+    public function paymentCheck(Request $request)
+    {
+        Session::put('payment', $request->payment);
+        Session::put('shipment', $request->shipment);
+
+        return redirect('cart/cartC');
+    }
+
+
+
 
     public function cartC()
     {
-        return view('front.cart.shoppingcart_C');
+        if (Session::has('payment') && Session::has('shipment')) {
+            $qty = \Cart::getTotalQuantity();
+            $subTotal = \Cart::getSubTotal();
+            $shippingFee = \Cart::getSubTotal() > 1000 ? 0 : 60;
+            $total =  $subTotal + $shippingFee;
+
+            return view('front.cart.shoppingcart_C', compact('qty', 'subTotal', 'shippingFee', 'total'));
+        } else {
+            return redirect('cart/cartB');
+        }
     }
 
     public function cartD()
@@ -112,5 +140,4 @@ class FrontController extends Controller
         \Cart::clear();
         return 'sucess';
     }
-
 }
