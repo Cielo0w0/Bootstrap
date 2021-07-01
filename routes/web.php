@@ -27,9 +27,15 @@ Route::get('/register','FrontController@register');
 Route::prefix('/cart')->group(function (){
     // 購物車頁面
     Route::get('/cartA','FrontController@cartA');
-    Route::get('/cartB','FrontController@cartB');
-    Route::post('/cartB/check','FrontController@paymentCheck');
-    Route::get('/cartC','FrontController@cartC');
+
+    // 購物車一定要有東西才能走2~3步
+    Route::middleware(['shopping'])->group(function () {
+        Route::get('/cartB','FrontController@cartB');
+        Route::post('/cartB/check','FrontController@paymentCheck');
+        Route::get('/cartC','FrontController@cartC');
+        Route::post('/cartC/check','FrontController@shipmentCheck');
+    });
+    // 第4步已被清空了，故不限制購物車一定要有東西
     Route::get('/cartD','FrontController@cartD');
 
     // 購物車計算
@@ -37,6 +43,7 @@ Route::prefix('/cart')->group(function (){
     Route::get('/content','FrontController@content');
     Route::get('/clear','FrontController@clear');
     Route::post('/update','FrontController@update');
+    Route::post('/delete','FrontController@delete');
 });
 
 Route::get('/product','FrontController@product');

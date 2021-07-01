@@ -65,20 +65,22 @@
             </div>
         </div>
         <!-- 右邊資訊 -->
-        <div class="d-flex ">
-            <!-- 數量 -->
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="quantity" style="padding-right: 32px;">
-                    <button type="button" class="btn minus-btn" style="padding:0">-</button>
-                    <input type="number" value="{{$product->quantity}}" data-price="{{$product->price}}"
-                        data-id="{{$product->id}}" class="qty-input"
-                        style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
-                    <button type="button" class="btn  plus-btn" style="padding:0">+</button>
-                </div>
-                <div class="price ml-1" data-price="{{$product->price}}"
-                    style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 39px;">$ {{number_format($product->price * $product->quantity)}}
-                </div>
+
+        <!-- 數量 -->
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="quantity" style="padding-right: 32px;">
+                <button type="button" class="btn minus-btn" style="padding:0 ; border:0">-</button>
+                <input type="number" value="{{$product->quantity}}" data-price="{{$product->price}}"
+                    data-id="{{$product->id}}" class="qty-input"
+                    style="width: 2rem;margin:0 .5rem; font-size: .875rem; line-height: 1.25rem; height: 1.5rem;border-width: 1px;border-radius: .25rem; background-color:rgb(243,244,246);border-color: #e5e7eb;text-align:center">
+                <button type="button" class="btn  plus-btn" style="padding:0 ; border:0">+</button>
             </div>
+            <div class="price " data-price="{{$product->price}}"
+                style="font-size: .75rem; line-height: 1rem;font-weight: 500; width: 31px;margin-right: 13px;">
+                ${{number_format($product->price * $product->quantity)}}
+            </div>
+            <button class="del-btn" data-id="{{ $product->id }}"
+                style="border-radius: 50%;border:0;background-color:rgb(214, 214, 214);width:25px;hight:25px;color:rgb(255, 255, 255)">x</button>
         </div>
     </div>
     @endforeach
@@ -124,10 +126,10 @@
     <!-- 返回&下一步 -->
     <div class="next d-flex justify-content-between flex-row align-items-center"
         style="padding-top:24px ;margin-top: 24px;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
-        <div class="d-flex align-items-center ">
+        <a herf="{{asset('/product')}}" class="d-flex align-items-center ">
             <i class="fa fa-arrow-left" style="padding-right: .5rem;"></i>
-            <a herf="{{asset('/product')}}" class="text-md font-medium text-black-400 ">返回購物</a>
-        </div>
+            <div class="text-md font-medium text-black-400 ">返回購物</div>
+        </a>
         <a href="{{ asset('/cart/cartB') }}">
             <button type="button" class="btn btn-primary btn-lg"
                 style="padding:0 48px;height: 3rem;border-radius: .25rem;background-color: rgb(59,130,246);">下一步</button>
@@ -218,33 +220,36 @@
         });
     });
 
+
+    var delBtns = document.querySelectorAll('.del-btn');
+    delBtns.forEach(function(delBtn){
+        delBtn.addEventListener('click',function(){
+            var productId = this.getAttribute('data-id');
+
+            var formData = new FormData();
+            formData.append('_token','{{ csrf_token() }}');
+            formData.append('productId',productId);
+
+            var delElement = this ;
+            fetch('/cart/delete',{
+                'method':'POST',
+                'body':formData
+            }).then(function(response){
+                return response.text();
+            }).then(function(result){
+                if(result=='success'){
+                    delElement.parentElement.parentElement.remove();
+                    updateShoppingCart();
+                }
+            })
+        });
+    });
+
     window.addEventListener('load',function(){
         updateShoppingCart()
     });
 
 
-    // // 送資料去購物車
-    // var formData = new FormData();
-    // formData.append('_token','{{ csrf_token() }}');
-    // formData.append('productId',input.getAttribute('data-id'));
-    // formData.append('newQty',newQty);
-
-    // fetch('/cart/update',{
-    //     'method':'post',
-    //     'body':formData
-    // }).then(function(response){
-    //     return response.text();
-    // }).then(function(result){
-    //   if(result=='sucess'){
-    //     if (newQty<1) {
-    //         input.value = 1;
-    //     } else {
-    //         input.value = newQty;
-    //     }
-    //     var price = qtyArea.nextElementiSidling;
-    //     price.innerText = '$'+(price.getAttribute('data-price')*input)
-    //   }
-    // })
 
 </script>
 @endsection

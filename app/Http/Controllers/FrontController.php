@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\Order;
+use App\OrderDetail;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
@@ -83,9 +85,78 @@ class FrontController extends Controller
         }
     }
 
+
+
+
+    public function shipmentCheck(Request $request)
+    {
+        // dd($request->all());
+
+        $cartProducts = \Cart::getContent();
+
+        // $totalPrice = 0;
+        // $totalQty = 0;
+
+        // foreach ($cartProducts as $cartProduct) {
+        //     $product = Product::find($cartProduct->id);
+
+        //     $totalPrice += $product->prcie * $cartProduct->quantity;
+        //     $totalQty += $cartProduct->quantity;
+        // }
+
+        $order = Order::create([
+            'order_no' => 'DP' . time() . rand(1, 999),
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'county' => $request->county,
+            'district' => $request->district,
+            'zipcode' => $request->zipcode,
+            'address' => $request->address,
+            'price' => 9999999,
+            // 'price' => $totalPrice,
+            'pay_type' => Session::get('payment'),
+            'shipping' => Session::get('shipment'),
+            'shipping_fee' => 99999999,
+            // 'shipping_fee' => $totalPrice > 1000 ? 0 : 60,
+            'shipping_status_id' => 0,
+            'order_status_id' => 0,
+
+        ]);
+
+        $totalPrice = 0;
+        foreach ($cartProducts as $cartProduct) {
+            $product = Product::find($cartProduct->id);
+            $totalPrice += $product->price * $cartProduct->quantity;
+
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'qty' => $cartProduct->quantity,
+                'old' => json_encode($product),
+            ]);
+        }
+
+        $order->update([
+            'price' => $totalPrice,
+            'shipping_fee' => $totalPrice > 1000 ? 0 : 60,
+        ]);
+
+        Session::forget('payment');
+        Session::forget('shipment');
+        \Cart::clear();
+
+        return redirect('cart/cartD')->with('order', $order);
+    }
+
+
     public function cartD()
     {
-        return view('front.cart.shoppingcart_D');
+        if (Session::has('order')) {
+            return view('front.cart.shoppingcart_D');
+        } else {
+            return redirect('/');
+        }
     }
 
 
@@ -138,6 +209,12 @@ class FrontController extends Controller
     public function clear()
     {
         \Cart::clear();
+        return 'sucess';
+    }
+
+    public function delete(Request $request)
+    {
+        \Cart::remove($request->productId);
         return 'sucess';
     }
 }

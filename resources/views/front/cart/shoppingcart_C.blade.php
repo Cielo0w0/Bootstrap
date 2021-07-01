@@ -51,29 +51,29 @@
     style="padding-top:20px ;border-width: 1px 0 0 0 ; border-style: solid; border-color: #e5e7eb;">
     <!-- 寄送資料:標題 -->
     <h2 style="font-size: 1.5rem; line-height: 2rem; color: #374151;">寄送資料</h2>
-    <form action="" method="POST">
+    <form action="{{ asset('/cart/cartC/check') }}" method="POST">
         @csrf
         <!-- 姓名 -->
         <div class="d-flex flex-column w-100">
-            <label class="" for="cus_name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
+            <label class="" for="name" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
                 姓名</label>
-            <input class="" id="cus_name" name="cus_name" type="text" required="" placeholder="王小明" aria-label="Name"
+            <input class="" id="name" name="name" type="text" required="" placeholder="王小明" aria-label="Name"
                 style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
         <!-- 電話 -->
         <div class="d-flex flex-column w-100" style="margin-top: 8px;">
-            <label class="" for="cus_phone" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;"> 電話
+            <label class="" for="phone" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;"> 電話
             </label>
-            <input class="" id="cus_phone" name="cus_phone" type="text" required="" placeholder="0912345678"
+            <input class="" id="phone" name="phone" type="text" required="" placeholder="0912345678"
                 aria-label="phone"
                 style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
         <!-- 信箱 -->
         <div class="d-flex flex-column w-100" style="margin-top: 8px;">
-            <label class="" for="cus_email" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
+            <label class="" for="email" style="padding:4px;font-size: 1.25rem; line-height: 1.75rem;margin: 0;">
                 Email
             </label>
-            <input class="" id="cus_email" name="cus_email" type="email" required="" placeholder="abc123@gmail.com"
+            <input class="" id="email" name="email" type="email" required="" placeholder="abc123@gmail.com"
                 aria-label="Email"
                 style="padding:8px 20px;border-width: 2px; border-color: rgb(229,231,235); border-radius: .25rem;background-color: unset;border-style: solid;">
         </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="" style="padding-left:4px ; margin-top:8px ; width:33.33%">
                 <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
-                <input class="zipcode form-control" type="text" size="3" readonly placeholder="郵遞區號">
+                <input class="zipcode form-control" name="zipcode"type="text" size="3" readonly placeholder="郵遞區號">
             </div>
             <div class="w-100" style="margin-top:8px ;">
                 <input class="" id="address" name="address" type="text" required="" placeholder="地址" aria-label="Email"
@@ -151,7 +151,7 @@
             </a>
             <!-- 下 -->
             {{-- <a href="{{ asset('/cart/cartD') }}"> --}}
-            <button type="button" class="btn btn-primary btn-lg"
+            <button type="submit" class="btn btn-primary btn-lg"
                 style="padding:0 48px;height: 3rem;border-radius: .25rem;border-width: 2px;background-color: rgb(59,130,246);">
                 前往付款
             </button>
